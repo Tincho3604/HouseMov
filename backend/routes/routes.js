@@ -3,13 +3,22 @@ const userController = require('../controllers/userController')
 const houseController = require('../controllers/houseController')
 const router =express.Router()
 
-router.route('/user')
-.get(userController.getUser)
-.post(userController.uploadUser)
 
-router.route('/user/:id')
+router.route('/users')
+.get(userController.getUser)
+.post(userController.validateUser, userController.uploadUser)
+
+router.route('/users/:id')
 .delete(userController.deleteUser)
 .put(userController.modifyUser)
+
+router.route('/login')
+.post(userController.logUser)
+
+router.route('/getUser')
+.post(userController.getUsersExist)
+
+
 
 router.route('/houses')
 .get(houseController.getHouse)
