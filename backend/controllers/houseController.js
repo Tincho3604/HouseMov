@@ -17,7 +17,8 @@ const houseController={
         
     uploadHouse: async (req, res) => {
 
-        var {address, neighborhood, userId, squareMeters, bedrooms, bathrooms, price, garden} = req.body//destructuring
+        var {address, neighborhood, squareMeters, bedrooms, bathrooms, price, garden, userId, photo, photo2, views} = req.body//destructuring
+        /* var userId = req.body.user */
         const newHouse = new House({
             address, 
             neighborhood, 
@@ -26,17 +27,20 @@ const houseController={
             bedrooms, 
             bathrooms, 
             price, 
-            garden
+            garden,
+            photo,
+            photo2,
+            views
         })
         try{
             await newHouse.save()
             res.json({
                 success: true,
                 response:"House uploaded"})
-        }catch{
+        }catch(error){
             res.json({
                 success: false,
-                response:"Error uploading house"})
+                response:error})
         }
         
     },
@@ -57,12 +61,12 @@ const houseController={
 
     modifyHouse: async (req, res) => {
         var id= req.params.id
-        var {address, neighborhood, userId, squareMeters, bedrooms, bathrooms, price, garden} = req.body
+        var {address, neighborhood, userId, squareMeters, bedrooms, bathrooms, price, garden, date} = req.body
         
         try{
             await House.findOneAndUpdate(
                 {_id:id},
-                {address, neighborhood, userId, squareMeters, bedrooms, bathrooms, price, garden}
+                {address, neighborhood, userId, squareMeters, bedrooms, bathrooms, price, garden, date}
             )
             res.json({
                 success: true,

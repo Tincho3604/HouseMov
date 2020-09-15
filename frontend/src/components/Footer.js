@@ -2,11 +2,11 @@ import React from 'react'
 import '../styles/header.css'
 import {NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'
-const Header = (props) =>{
+const Footer = (props) =>{
     
     return(
         <header>
-            <div className="header">
+            <div className="header footer">
                 <div className="headerContent">
                     <h3 className="logo">HouseMuv</h3>
                     <nav className="nav">
@@ -24,10 +24,7 @@ const Header = (props) =>{
                         <NavLink className="link" to ="/buy">Buy a House</NavLink>
                         <NavLink className="link" to ="/sell">Sell a House</NavLink> 
                         <NavLink className="link" to ="/sign-out">Log Out</NavLink> 
-                        <div className="userContent">
-                            <img className="photoUser" src={props.userLogged.photo}></img>
-                            <p className="userName">Welcome, {props.userLogged.name}</p>
-                        </div>
+                        
                         </>
                         }
                         
@@ -44,4 +41,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps)(Footer)

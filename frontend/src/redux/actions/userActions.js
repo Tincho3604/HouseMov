@@ -81,7 +81,8 @@ const userActions = {
                 payload:{
                     token,
                     name: res.data.response.name,
-                    photo: res.data.response.photo
+                    photo: res.data.response.photo,
+                    role: res.data.response.role
                     
                     
                 }

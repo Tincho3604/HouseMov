@@ -1,4 +1,5 @@
 const express = require('express')
+const passport = require('../config/passport')
 const userController = require('../controllers/userController')
 const houseController = require('../controllers/houseController')
 const router =express.Router()
@@ -18,11 +19,12 @@ router.route('/login')
 router.route('/getUser')
 .post(userController.getUsersExist)
 
-
+router.route('/validateToken')
+.get(passport.authenticate('jwt', {session: false}), userController.validateToken)
 
 router.route('/houses')
 .get(houseController.getHouse)
-.put(houseController.uploadHouse)
+.post(/* passport.authenticate('jwt', {session: false}), */ houseController.uploadHouse)
 
 
 router.route('/house/:id')

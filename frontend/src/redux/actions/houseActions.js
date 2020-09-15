@@ -10,7 +10,7 @@ const houseActions = {
 
             dispatch({
                 type: 'GET_HOUSES',
-                payload: houses
+                payload: houses.response
             })
             
         }
@@ -26,6 +26,26 @@ const houseActions = {
             })
 
             return (house)
+        }
+    },
+    uploadHouse:(token) =>{
+        return async (dispatch, getState)=>{
+            await axios.post('httpe://localhost:4000/api/houses',{},{
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            dispatch({
+                type: 'UPLOAD_HOUSE'
+            })
+        }
+    },
+    housesFiltered: (filter) => {
+        return async (dispatch, getState) => {
+            dispatch({
+                type: 'FILTERED_HOUSES',
+                payload: filter
+            })
         }
     }
 }

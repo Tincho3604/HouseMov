@@ -5,7 +5,8 @@ import {connect} from 'react-redux'
 import userActions from '../redux/actions/userActions'
 import Swal from 'sweetalert2'
 import GoogleLogin from 'react-google-login';
-
+import Footer from '../components/Footer'
+import'../styles/logs.css'
 
 
 class SignUp extends React.Component{
@@ -160,9 +161,9 @@ class SignUp extends React.Component{
             <Header />
             <div className="signContainer">
                 <div className=" titleContainer">
-                    <div className="line"></div>
+
                     <h1 className="title">Sign Up</h1>
-                    <div className="line"></div>
+
                 </div>
                     
                 <div className="inputs">
@@ -202,7 +203,7 @@ class SignUp extends React.Component{
                     />
                 </div>
             </div>
-
+            <Footer/>
 
             </>
         )

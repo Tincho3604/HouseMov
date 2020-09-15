@@ -1,16 +1,23 @@
 const initialState = {
-    houses:[]
+    allHouses:[]
 }
 
 const houseReducer = (state = initialState, action) => {
     switch(action.type){
-        case 'GETINFO':
+        case 'GET_HOUSES':
             
             return {
                 ...state, 
-                houses: action.payload
+                allHouses: action.payload
             }    
-            
+        case 'FILTERED_HOUSES':
+            const filteredHouses = state.allHouses.filter(house => 
+                house.address.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(action.payload.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) === 0)
+            return {
+                ...state,
+                filteredHouses
+            }
+                    
         default: 
             return state    
     }

@@ -9,12 +9,13 @@ const userReducer = (state = initalState, action) =>{
     switch(action.type){
         case "LOG_USER_INTO_APP":
             localStorage.setItem('token', action.payload.token)
+            console.log(action.payload)
             return{
                 ...state, 
                 name: action.payload.name,
                 token: action.payload.token,
                 photo: action.payload.photo,
-                role: action.payload.roles
+                role: action.payload.role
             }
         case "UNLOG_USER_FROM_APP":
             localStorage.clear()
@@ -23,7 +24,7 @@ const userReducer = (state = initalState, action) =>{
                 name:"",
                 token:"",
                 photo:"",
-                rolo:""
+                role:""
             }
         default:
             return state

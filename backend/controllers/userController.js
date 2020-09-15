@@ -123,7 +123,7 @@ const userController={
     },
 
     logUser: async (req, res) => {
-        var {user, password} = req.body
+        var {user, password } = req.body
         
         const userExist = await User.findOne({user})
         if (!userExist){
@@ -141,7 +141,7 @@ const userController={
                             token,
                             name: userExist.name,
                             photo: userExist.photo,
-                            role: userExist.rol
+                            role: userExist.role
                             }
                         })
                     }
@@ -151,8 +151,9 @@ const userController={
         }
     },
     validateToken: (req,res) =>{
-        const name = req.user.user
+        const name = req.user.name
         const photo = req.user.photo
+        const role = req.user.role
         res.json({
             success: true, 
             response: {name, photo, role}

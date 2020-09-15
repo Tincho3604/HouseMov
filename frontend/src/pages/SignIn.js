@@ -7,6 +7,7 @@ import GoogleLogin from 'react-google-login';
 
 
 import Swal from 'sweetalert2'
+import Footer from '../components/Footer';
 
 
 class SignIn extends React.Component{
@@ -86,9 +87,9 @@ class SignIn extends React.Component{
 
             <div className="signContainer">
                 <div className=" titleContainer">
-                    <div className="line"></div>
+
                     <h1 className="title">Sign In</h1>
-                    <div className="line"></div>
+
                 </div>
                 <div className="inputs">
                     <span className = {this.state.error === "" ? "" : "logError"}>{this.state.error}</span>
@@ -107,7 +108,7 @@ class SignIn extends React.Component{
                 </div>
             </div>
 
-
+            <Footer/>
 
             </>
         )
