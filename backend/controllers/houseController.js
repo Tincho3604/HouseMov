@@ -17,9 +17,10 @@ const houseController={
     },
         
     uploadHouse: async (req, res) => {
-
-        var {address, neighborhood, squareMeters, bedrooms, bathrooms, price, garden, userId, photo, photo2, views} = req.body//destructuring
-        /* var userId = req.body.user */
+        console.log("hola")
+        var userId = req.user._id
+        var {address, neighborhood, squareMeters, bedrooms, bathrooms, price, garden, photo, photo2} = req.body//destructuring
+        
         const newHouse = new House({
             address, 
             neighborhood, 
@@ -31,10 +32,10 @@ const houseController={
             garden,
             photo,
             photo2,
-            views
         })
         try{
             await newHouse.save()
+            console.log(newHouse)
             res.json({
                 success: true,
                 response:"House uploaded"})
@@ -121,7 +122,23 @@ const houseController={
                 response: error
             })
         }
-    }
+    },
+    getHouseByUser: async (req, res) =>{
+
+        try{
+            const data = await House.find({userId: req.user._id})
+            res.json({
+                success: true,
+                response:data
+            })
+        }catch(error){
+                res.json({
+                    success: false,
+                    response: error
+                })
+            }
+        },
+    
     
 
 }

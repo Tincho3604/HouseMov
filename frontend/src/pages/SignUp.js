@@ -86,7 +86,7 @@ class SignUp extends React.Component{
              const response = await this.props.createAccount(this.state.newUser)
             
              if (response.success === true){
-                Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you here, ${response.user}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+               
                 
                 
             }else{
@@ -131,7 +131,7 @@ class SignUp extends React.Component{
         const res = await this.props.createAccount(this.state.newUser)
        
         if (res.success === true){
-            Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you here, ${response.profileObj.givenName}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+            
             
         }else{
             if (res.user !== ""){

@@ -10,6 +10,8 @@ import House from './pages/House'
 import { connect } from 'react-redux';
 import userActions from './redux/actions/userActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import MyAccount from './pages/MyAccount';
+import MyHouses from './pages/MyHouses'
 
 class App extends React.Component{
   render(){
@@ -27,6 +29,8 @@ class App extends React.Component{
           <Route path = "/sell" component = {Sell}/>
           <Route path = "/house/:id" component ={House} />
           <Route path ="/sign-out" component={SignOut} />
+          <Route path = "/my-houses" component={MyHouses}/>
+          <Route path ="/my-account" component={MyAccount} />
           <Redirect to ="/"/>
         </Switch>
       ) 

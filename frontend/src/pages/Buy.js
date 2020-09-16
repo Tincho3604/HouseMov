@@ -18,6 +18,7 @@ class Buy extends React.Component {
     }
 
     async componentDidMount() {
+            window.scrollTo(0, 0)
          await this.props.getHouses()
 
          this.setState({
@@ -109,8 +110,12 @@ class Buy extends React.Component {
                     filteredHouse: filtered
                 })
             }            
-                
-            console.log(this.state)
+            window.scroll({
+                top: 650, 
+                left: 0, 
+                behavior: 'smooth'
+              })
+            
         }
     
 

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const userActions = {
     createAccount : newUser =>{
@@ -19,7 +20,7 @@ const userActions = {
                 return error
                
             }else{
-                
+                await Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you here, ${res.data.response.name}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
                 dispatch({
                     type: "LOG_USER_INTO_APP",
                     payload:res.data.response
@@ -49,9 +50,10 @@ const userActions = {
             const res = await axios.post("http://localhost:4000/api/login", user)
             console.log(res)
             if (!res.data.success){
-                return (res.data.response)    
-            }else{
+                return (res.data.response)
                 
+            }else{
+                await Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you again, ${res.data.response.name}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
                 dispatch({
                     type: "LOG_USER_INTO_APP",
                     payload:res.data.response
@@ -89,6 +91,40 @@ const userActions = {
                     
                 }
             })}
+        }
+    },
+    getFullUser: token =>{
+        console.log(token)
+        return async(dispatch, getState) =>{
+            const res = await axios.get("http://localhost:4000/api/fullUser", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            console.log(res)
+            dispatch({
+                type: "GET_FULL_USER"
+            })
+            return res.data.response.userToSend
+        }
+    },
+    modAccount: (token, user) =>{
+        return async(dispatch, getState) =>{
+            const res = await axios.put("http://localhost:4000/api/modifyUser", user ,{
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            dispatch({
+                type: "LOG_USER_INTO_APP",
+                payload:{
+                    token,
+                    name: res.data.response.name,
+                    photo: res.data.response.photo,
+                    role: res.data.response.role
+                }
+            })
+            return(res.data.success)
         }
     }
 }

@@ -46,13 +46,44 @@
 }
 .price__house span{
     font-size: 2rem;
-    background-color:  #212e42;
+    background-color:  #6a93d3;
     color: whitesmoke;
     
     padding: 0.5em;
     border-radius: 10px;
     font-weight: bolder;
 }
+
+.seller__details{
+    background-color: #212e42;
+    text-align: center;
+    margin: 0em 40vw 4em 40vw;
+    border-radius: 10px;
+    padding: 1em;
+    -webkit-box-shadow: 0px 11px 15px -9px rgba(0, 0, 0, 0.658);
+    box-shadow: 0px 11px 15px -9px rgba(0, 0, 0, 0.514);
+}
+
+.seller__details p:nth-child(2){
+    color: whitesmoke;
+    padding: 0em 2em;
+    margin:1em;
+    font-size: 1.2em;
+}
+
+.seller__details p:nth-child(3){
+    color: whitesmoke;
+    text-transform: uppercase;
+    padding: 0em 2em;
+    margin:1em;
+    font-size: 1.2em;
+}
+
+.seller__details img{
+    border-radius: 50%;
+    width: 7em;
+    margin: 0.5em;
+} 
 
 
 @media only screen and (max-width: 1500px) {
@@ -78,6 +109,10 @@
         margin: 1em 8em;
         padding: 3rem;
     }
+
+    .seller__details{
+        margin: 0em 30vw 4em 30vw;
+    }
 }
 
 
@@ -102,13 +137,42 @@
         width: 90vw;
         height: 30vh;
         margin-top: 3em;
-        margin-left: 3em;
+        margin-left: 2.5em;
     }
 
     .details__house{
-        font-size: 1.3rem;
+        flex-direction: column;
+      
+        align-items: center;
+        font-size: 1.5rem;
+        margin: 1em 4em;
+        padding: 2.5rem;
+    }
+    .details__house p{
+        padding: 0.5em;
+    }
+
+    .seller__details{
+        margin: 0em 20vw 4em 20vw;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    
+    .photo__house{  
+        width: 90vw;
+        height: 20vh;
+        margin-left: 1.7em;
+    }
+
+    .details__house{
+        font-size: 1.5rem;
         margin: 1em 1em;
-        padding: 2rem;
+        padding: 2.5rem;
+    }
+
+    .seller__details{
+        margin: 0em 5vw 4em 5vw;
     }
 }
 

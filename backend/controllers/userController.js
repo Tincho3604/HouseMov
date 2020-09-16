@@ -101,13 +101,13 @@ const userController={
     },
 
     modifyUser: async (req, res) => {
-        var id= req.params.id
-        var {name, photo, password, passwordValidation, user, surname, role, email, country} = req.body
+        var id= req.user._id
+        var {name, photo, user, surname, role, email, country} = req.body
         
         try{
             await User.findOneAndUpdate(
                 {_id:id},
-                {name, photo, password, passwordValidation, user, surname, role, email, country}
+                {name, photo, user, surname, role, email, country}
             )
             res.json({
                 success: true,
@@ -169,6 +169,32 @@ const userController={
             res.json({
                 success:false
             })
+        }
+    },
+    getFullUser: async (req, res) =>{
+        const id = req.user._id
+        try{
+            const user = await User.findOne({_id:id})
+            
+            const userToSend = {
+                name: user.name,
+                surname: user.surname,
+                country: user.country,
+                mail: user.mail,
+                photo: user.photo,
+                user: user.user,
+                role: user.role
+            }
+            res.json({
+                success: true,
+                response: {
+                    userToSend
+                }
+            })
+        }catch{
+            res.json({
+                success: false,
+                response:"Error geting user"})
         }
     }
 

@@ -46,7 +46,7 @@ class SignIn extends React.Component{
             const response =  await this.props.logUser(logUser)
             
             if (response.success === true){
-                Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you again, ${response.user}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+                
                 
                 
                 
@@ -71,8 +71,8 @@ class SignIn extends React.Component{
         console.log(res)
         if(res === true){
             const resp =  await this.props.logUser(this.state.logUser)
-            console.log(resp)
-            Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you again, ${response.profileObj.givenName}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+
+            
             }else{
                 Swal.fire({  title: 'You must sign up!',  text: `Please go to create an account, ${response.profileObj.givenName}.`,  icon: 'warning',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
             }

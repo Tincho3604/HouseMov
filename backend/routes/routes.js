@@ -13,6 +13,12 @@ router.route('/users/:id')
 .delete(userController.deleteUser)
 .put(userController.modifyUser)
 
+router.route('/fullUser')
+.get(passport.authenticate('jwt', {session: false}), userController.getFullUser)
+
+router.route('/modifyUser')
+.put(userController.validateUser, userController.modifyUser)
+
 router.route('/login')
 .post(userController.logUser)
 
@@ -24,8 +30,10 @@ router.route('/validateToken')
 
 router.route('/houses')
 .get(houseController.getHouse)
-.post(/* passport.authenticate('jwt', {session: false}), */ houseController.uploadHouse)
+.put(passport.authenticate('jwt', {session: false}), houseController.uploadHouse)
 
+router.route('/houseByUser')
+.get(passport.authenticate('jwt', {session: false}), houseController.getHouseByUser)
 
 router.route('/house/:id')
 .get(houseController.getHouseById)
