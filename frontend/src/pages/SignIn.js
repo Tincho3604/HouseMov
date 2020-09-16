@@ -84,19 +84,26 @@ class SignIn extends React.Component{
         return (
             <>
             <Header />
-
+            <h3 className="titleHouses">Enter into your account</h3>
+            <div className="housisContainer">
+                <img src={require("../images/casa.png")}></img>
+                <img src={require("../images/casa(1).png")}></img>
+                <img src={require("../images/casa(2).png")}></img>
+                <img src={require("../images/casa(3).png")}></img>
+                <img src={require("../images/casa(5).png")}></img>
+                <img src={require("../images/casa(6).png")}></img>
+                <img src={require("../images/casa(7).png")}></img>
+                <img src={require("../images/casa(4).png")}></img>
+            </div>
             <div className="signContainer">
-                <div className=" titleContainer">
-
-                    <h1 className="title">Sign In</h1>
-
-                </div>
+                
                 <div className="inputs">
                     <span className = {this.state.error === "" ? "" : "logError"}>{this.state.error}</span>
                     <input className="account" name="user" type="text" placeholder="Enter your user" onChange={this.getForm}></input>
                     <input className="password" type="password" name="password" placeholder="Enter your password" onChange={this.getForm}></input>
-                    
+                 </div>
                     <button onClick={this.submit} className="send">Sign In</button>
+                    <p className="or">Or</p>
                     <GoogleLogin
                         className="googleBtn"
                         clientId="204753879301-j9otsgm2bstkhae2rs9pf2b4kmgqamlu.apps.googleusercontent.com"
@@ -105,9 +112,18 @@ class SignIn extends React.Component{
                         onFailure={this.responseGoogle}
                         cookiePolicy={'single_host_origin'}
                     />
-                </div>
+                
             </div>
-
+            <div className="housisContainer">
+                <img src={require("../images/casa.png")}></img>
+                <img src={require("../images/casa(1).png")}></img>
+                <img src={require("../images/casa(3).png")}></img>
+                <img src={require("../images/casa(5).png")}></img>
+                <img src={require("../images/casa(6).png")}></img>
+                <img src={require("../images/casa(4).png")}></img>
+                <img src={require("../images/casa(7).png")}></img>
+                <img src={require("../images/casa(2).png")}></img>
+            </div>
             <Footer/>
 
             </>

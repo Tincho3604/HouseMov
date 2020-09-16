@@ -1,4 +1,5 @@
 const House = require('../models/HouseModel')
+const User = require('../models/userModel')
 
 
 const houseController={
@@ -78,13 +79,24 @@ const houseController={
                 response:"Error modifying House"})
         }
     },
-    getHouseById: async (res, req) =>{
+     getHouseById: async (req, res) =>{
         var id = req.params.id
         try{
-            const data = await House.find({_id: id})
+            const house = await House.findOne({_id: id})
+            console.log(house)
+            const user = await User.findOne({_id: house.userId})
+            const dataUser={
+                name: user.name,
+                surname: user.surname,
+                mail: user.mail
+            }
             res.json({
                 success: true,
-                response: data
+                response: {
+                    house,
+                    dataUser
+                }
+                
             })
         }catch{
             res.json({
@@ -92,7 +104,25 @@ const houseController={
                 response: "Error geting house"
             })
         }
+    },
+    uploadViews: async (req, res) =>{
+        var id = req.params.id
+        try{
+            const house = await House.findOne({_id:id})
+            var views = house.views += 1
+            await House.updateOne({_id:id},{views})
+            res.json({
+                success: true,
+                response: "viewed"
+            })
+        }catch(error){
+            res.json({
+                success: false,
+                response: error
+            })
+        }
     }
+    
 
 }
 

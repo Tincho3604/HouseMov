@@ -23,7 +23,7 @@ div.header div.headerContent nav{
 div.header div.headerContent nav div.userContent {
     margin:0 auto 1rem auto;
     background-color: #2868ce;
-    padding: 1rem;
+    padding: 0.5rem;
     border-radius: 1rem;
     display: flex;
     flex-direction: row;
@@ -33,7 +33,7 @@ div.header div.headerContent nav div.userContent {
 }
 
 div.header div.headerContent h3.logo{
-    padding: 1rem 0
+    padding: 1rem 0;
 }
 
 div.header div.headerContent nav img.photoUser{
@@ -44,16 +44,16 @@ div.header div.headerContent nav img.photoUser{
 
 div.header div.headerContent nav div.userContent p.userName{
     color: whitesmoke;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 div.header div.headerContent nav a.link{
     color: whitesmoke;
     text-decoration: none;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     background-color: #2868ce;
-    padding: 1rem;
+    padding: 0.5rem;
     margin-bottom: 1rem;
 }
 

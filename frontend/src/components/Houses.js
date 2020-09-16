@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import '../styles/popularHouses.css'
 
 import PopularHouse from './PopularHouse'
@@ -49,7 +50,7 @@ class Houses extends React.Component{
                     )}
                         
                 </div>
-                <button className="moreBtn">View All</button>
+                <NavLink to ='/buy'><button className="moreBtn">View All</button></NavLink>
                 </>}
                 <button onClick={this.changeStatus} className="moreBtn">{this.state.viewMore ? "View Less" : "View More"}</button>
             </div>

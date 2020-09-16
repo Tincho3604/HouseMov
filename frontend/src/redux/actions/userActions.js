@@ -19,9 +19,11 @@ const userActions = {
                 return error
                
             }else{
+                
                 dispatch({
                     type: "LOG_USER_INTO_APP",
                     payload:res.data.response
+                    
                 })
                 return {
                     success: true,

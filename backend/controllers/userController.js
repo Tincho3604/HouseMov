@@ -18,25 +18,23 @@ const userController={
     },
         
     uploadUser: async (req, res) => {
-        console.log("HOLA")
-        let {user, photo, password,name, surname,mail,country,role} = req.body//destructuring
+
+        let {user, password,name, surname,mail,role} = req.body//destructuring
         let error = false
         const passwordHashed = bcryptjs.hashSync(password, 10)
         
         const newUser = new User({
             user: user.trim(),
-            photo: photo.trim(),
             password: passwordHashed,
             name: name.trim().charAt(0).toUpperCase() + name.slice(1),
             surname: surname.trim().charAt(0).toUpperCase() + surname.slice(1),
             mail: mail.trim(),
-            country: country.trim().charAt(0).toUpperCase() + country.slice(1),
             role
         })
         try{
             
             const res = await newUser.save()
-            console.log(res)
+            
         }catch (err){
             error = err
         }finally{
@@ -54,7 +52,7 @@ const userController={
                             token,
                             name: newUser.name,
                             photo: newUser.photo,
-                            role: userExist.rol
+                            role: newUser.rol
                             }
                         })
                     }
@@ -66,13 +64,13 @@ const userController={
     validateUser: (req, res, next) =>{
         const schema = Joi.object({
             user: Joi.string().min(2).max(40).trim().required(),
-            photo: Joi.string().required().trim().required(),
+            photo: Joi.optional(),
             password: Joi.string().required().pattern(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,60}/, "password").trim(),
             passwordValidation: Joi.ref('password'),
             name: Joi.string().min(2).max(40).trim().required(),
             surname: Joi.string().min(2).max(40).trim().required(),
             mail: Joi.string().email().required().trim(),
-            country: Joi.string().min(2).max(40).trim().required(),
+            country: Joi.optional(),
             role:Joi.string().min(2).max(40).trim().required()
         })
         const validation = schema.validate(req.body)

@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp'
 import SignOut from './pages/SignOut'
 import Sell from './pages/Sell'
 import Buy from './pages/Buy'
+import House from './pages/House'
 import { connect } from 'react-redux';
 import userActions from './redux/actions/userActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -24,6 +25,7 @@ class App extends React.Component{
           <Route exact path = "/" component={Home}/>
           <Route path = "/buy" component = {Buy}/>
           <Route path = "/sell" component = {Sell}/>
+          <Route path = "/house/:id" component ={House} />
           <Route path ="/sign-out" component={SignOut} />
           <Redirect to ="/"/>
         </Switch>

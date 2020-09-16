@@ -1,36 +1,4 @@
 
-
-@media (min-width: 768px) {
-    .containerHouses{
-        width: 80%;
-        margin: 0 auto;
-    }
-    .firstFour{
-        display:flex;
-        flex-wrap: wrap;
-    }
-    .house{
-        width: 45%;
-        height: 30%;
-        margin: auto;
-        margin-bottom: 3rem;
-    }
-    .house img{
-        width: 100%;
-        height: 40vh;
-        margin: auto;
-        object-fit: cover;
-        object-position: 50% 50%;
-        border-radius: 1rem;
-    }
-}
-
-
-
-
-
-
-
 div.details{
     display: flex;
     color: whitesmoke;
@@ -80,4 +48,63 @@ div.details{
     box-shadow: 0px 11px 15px -9px rgba(0, 0, 0, 0.514);
     -webkit-transition: all 0.2s ease;
     transition: all 0.5s ease;
+}
+
+
+@media (max-width: 2000px) {
+    .containerHouses{
+        width: 80%;
+        margin: 0 auto;
+    }
+    .firstFour{
+        display:flex;
+        flex-wrap: wrap;
+    }
+    .house{
+        width: 45%;
+        height: 30%;
+        margin: auto;
+        margin-bottom: 3rem;
+    }
+    .house img{
+        width: 100%;
+        height: 40vh;
+        margin: auto;
+        object-fit: cover;
+        object-position: 50% 50%;
+        border-radius: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .firstFour{
+        display:flex;
+        flex-direction: column;
+    }
+    .house{
+        width: 90%;
+        height: 30%;
+        margin: auto;
+        margin-bottom: 2rem;
+    }
+}
+
+
+@media (max-width: 350px) {
+    .containerHouses{
+        width: 100%;
+    }
+    .firstFour{
+        display:flex;
+        flex-direction: column;
+    }
+    .house{
+        margin-bottom: 3rem;
+    }
+    .house img{
+        width: 100%;
+        height: 20vh;
+        object-fit: cover;
+    }
 }

@@ -18,9 +18,7 @@ class SignUp extends React.Component{
             name:"",
             surname:"",
             mail:"",
-            photo:"",
             passwordValidation: "",
-            country:"",
             role:""
         },
         errors:{
@@ -29,22 +27,21 @@ class SignUp extends React.Component{
             name:"",
             surname:"",
             mail:"",
-            photo:"",
             passwordValidation: "",
-            country:"",
             role:""
         } 
     }
     
-    getForm = e =>{
+    getForm = async e =>{
         const property = e.target.name
         const value = e.target.value
-        this.setState({
+        await this.setState({
             newUser:{
                 ...this.state.newUser,
                 [property]: value
             }
         })
+        console.log(this.state)
     }
     submit = async e =>{
         
@@ -78,22 +75,14 @@ class SignUp extends React.Component{
             validEmailRegex.test(this.state.newUser.mail)
             ? ""
             : "Enter a valid email"
-        errors.photo= 
-            this.state.newUser.photo.length < 2
-            ? "Enter a valid link"
-            : ""
-        errors.country = 
-            this.state.newUser.country.length < 2
-            ? "Enter a valid country"
-            : ""
         errors.role = 
-            this.state.newUser.country == ""
+            this.state.newUser.role == ""
             ? "Select an option"
             : ""
         this.setState({
             errors
         })
-        if (this.state.errors.user === "" && this.state.errors.passwordValidation === "" && this.state.errors.password === "" && this.state.errors.name=== "" && this.state.errors.surname=== "" && this.state.errors.mail=== "" && this.state.errors.photo=== "" && this.state.errors.country=== "" ){
+        if (this.state.errors.user === "" && this.state.errors.passwordValidation === "" && this.state.errors.password === "" && this.state.errors.name=== "" && this.state.errors.surname=== "" && this.state.errors.mail=== "" ){
              const response = await this.props.createAccount(this.state.newUser)
             
              if (response.success === true){
@@ -135,10 +124,8 @@ class SignUp extends React.Component{
                 name:response.profileObj.givenName,
                 surname:response.profileObj.familyName,
                 mail: response.profileObj.email,
-                photo:response.profileObj.imageUrl,
                 passwordValidation:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, ""),
-                country:"undefined",
-                role:"buy"
+                role:"undefined"
             }
         })
         const res = await this.props.createAccount(this.state.newUser)
@@ -159,12 +146,18 @@ class SignUp extends React.Component{
         return (
             <>
             <Header />
+            <h3 className="titleHouses">Create an account</h3>
+            <div className="housisContainer">
+                <img src={require("../images/casa.png")}></img>
+                <img src={require("../images/casa(1).png")}></img>
+                <img src={require("../images/casa(2).png")}></img>
+                <img src={require("../images/casa(3).png")}></img>
+                <img src={require("../images/casa(5).png")}></img>
+                <img src={require("../images/casa(6).png")}></img>
+                <img src={require("../images/casa(7).png")}></img>
+                <img src={require("../images/casa(4).png")}></img>
+            </div>
             <div className="signContainer">
-                <div className=" titleContainer">
-
-                    <h1 className="title">Sign Up</h1>
-
-                </div>
                     
                 <div className="inputs">
                     <span className={this.state.errors.mail === "" ? "" : "logError"}>{this.state.errors.mail}</span>
@@ -185,14 +178,15 @@ class SignUp extends React.Component{
                     <span className={this.state.errors.surname === "" ? "" : "logError"}>{this.state.errors.surname}</span>
                     <input className="surname" type="text" placeholder="Enter your surname" name="surname" onChange={this.getForm}></input>
                     
-                    <span className={this.state.errors.photo === "" ? "" : "logError"}>{this.state.errors.photo}</span>
-                    <input className="pic" type="text" placeholder="Link to your profile pic" name="photo" onChange={this.getForm}></input>
                     
-                    <span className={this.state.errors.country === "" ? "" : "logError"}>{this.state.errors.country}</span>
-                    <input className="country" type="text" placeholder="Your Country" name="country" onChange={this.getForm}></input>
-
+                            <select onChange={this.getForm} className="inputRole" name="role" >
+                                <option disabled selected>You want tu buy or sell a house:</option>
+                                <option value="buy"className="option">Buy a House</option>
+                                <option value="sell" className="option">Sell a House</option>
+                            </select>
+                </div>
                     <button className="send" onClick={this.submit}>Sign Up</button>
-                    
+                    <p className="or">or</p>
                     <GoogleLogin
                         className="googleBtn"
                         clientId="204753879301-j9otsgm2bstkhae2rs9pf2b4kmgqamlu.apps.googleusercontent.com"
@@ -201,7 +195,17 @@ class SignUp extends React.Component{
                         onFailure={this.responseGoogle}
                         cookiePolicy={'single_host_origin'}
                     />
-                </div>
+                
+            </div>
+            <div className="housisContainer">
+                <img src={require("../images/casa.png")}></img>
+                <img src={require("../images/casa(1).png")}></img>
+                <img src={require("../images/casa(3).png")}></img>
+                <img src={require("../images/casa(5).png")}></img>
+                <img src={require("../images/casa(6).png")}></img>
+                <img src={require("../images/casa(4).png")}></img>
+                <img src={require("../images/casa(7).png")}></img>
+                <img src={require("../images/casa(2).png")}></img>
             </div>
             <Footer/>
 

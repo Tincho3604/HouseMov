@@ -19,7 +19,8 @@ const houseActions = {
         
         return async (dispatch, getState) =>{
             const response = await axios.get('http://localhost:4000/api/house/'+ houseId)
-            const house = response.data
+            
+            const house = response.data.response
 
             dispatch({
                 type: 'GET_HOUSE'
@@ -30,7 +31,7 @@ const houseActions = {
     },
     uploadHouse:(token) =>{
         return async (dispatch, getState)=>{
-            await axios.post('httpe://localhost:4000/api/houses',{},{
+            await axios.post('http://localhost:4000/api/houses',{},{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -40,11 +41,12 @@ const houseActions = {
             })
         }
     },
-    housesFiltered: (filter) => {
-        return async (dispatch, getState) => {
+    uploadViews: (houseId) =>{
+        return async(dispatch, getState) =>{
+            const res = await axios.get('http://localhost:4000/api/viewsHouse/'+houseId)
+            console.log(res)
             dispatch({
-                type: 'FILTERED_HOUSES',
-                payload: filter
+                type:'UPLOAD_VIEWS'
             })
         }
     }

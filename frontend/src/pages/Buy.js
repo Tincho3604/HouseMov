@@ -1,75 +1,148 @@
 import React from 'react'
 import Header from '../components/Header'
 import '../styles/buy.css'
-import { Button, Input } from 'reactstrap'
+import { faBed, faCheck, faCross, faDollarSign, faMapMarkedAlt, faMoneyBillAlt, faMoneyBillWave, faToilet, faTree } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { connect } from 'react-redux'
 import houseActions from '../redux/actions/houseActions'
 import Footer from '../components/Footer'
+import { NavLink } from 'react-router-dom'
 
 class Buy extends React.Component {
 
     state = {
-        value: ""
+        price: "",
+        order:"",
+        houses:[],
+        filteredHouse:[]
     }
 
     async componentDidMount() {
          await this.props.getHouses()
+
+         this.setState({
+             ...this.state,
+             houses: this.props.houses,
+             filteredHouse: this.props.houses
+         })
      }
 
     inputFilterHome = e => {
+        const property = e.target.name
         const value = e.target.value
         this.setState({
-            value: value
+            ...this.state,
+            [property]: value
         })
+ 
+    }
+    filterP = () =>{
+        var filtered = this.state.houses
+        if (this.state.price !== ""){
+            switch (this.state.price){
+                case "60000":
+                    filtered = this.state.houses.filter(house=>(
+                        house.price <= 60000
+                    ))
+                    return(filtered)
+                    
+                case "150000":
+                    filtered = this.state.houses.filter(house=>(
+                        house.price > 60000 && house.price <= 150000)
+                    )
+                    return(filtered)
+                case "5000000":   
+                    filtered = this.state.houses.filter(house=>(
+                        house.price > 150000
+                    ))
+                    return(filtered)
+            }
+        }
     }
 
-    searchFilterHome = e => {
-        e.preventDefault()
-        this.props.housesFiltered(this.state.value)
+    orderF = (filtered) =>{
+        
+        if(this.state.order !==""){
+            switch (this.state.order){
+                case "mostPop":
+                    filtered.sort((a,b) => b.views - a.views)
+                    return(filtered)
+                case "leastPop":
+                    filtered.sort((a,b) => a.views - b.views)
+                    return(filtered)
+                case "newDate":
+                    filtered.sort((a,b) => {
+                        var dateA = new Date(a.date)
+                        var dateB = new Date(b.date)
+                        return (dateB - dateA)
+                    })
+                    return(filtered)
+                case "oldDate":
+                    filtered.sort((a,b) => {
+                        var dateA = new Date(a.date)
+                        var dateB = new Date(b.date)
+                        return (dateA - dateB)
+                    })      
+                    return(filtered)
+            }
+        }else{
+            return filtered
+        }
     }
+    
+    
 
     render() {
-
-        console.log(this.props)
+       
+        const searchFilterHome = async (e) => {
+            const filtered =  await this.filterP()
+            if (filtered === undefined){
+                const allfiltered = this.orderF(this.state.houses)
+                this.setState({
+                    ...this.state,
+                    filteredHouse: allfiltered
+                })
+            }else{
+                this.orderF(filtered)
+                this.setState({
+                    ...this.state,
+                    filteredHouse: filtered
+                })
+            }            
+                
+            console.log(this.state)
+        }
+    
 
         const mainBackground = require('../images/fondoPageBuy.jpg')
-       /*  const iconSearch = require('../images/iconBusqueda.png')
-        const divBanner1 = require('../images/divBanner-001.jpg')
-        const divBanner2 = require('../images/divBanner-002.jpg')
-        const divBanner3 = require('../images/divBanner-003.jpg')
-  */
+      
         return(
             <div className='mainContainer'>
                 <Header />
                 <div className="mainBackground" style={{backgroundImage: `url(${mainBackground})`}} >
                     <div className='divFilter'>
-                        <h1>Encontrá tu hogar ideal</h1>
-                        <div className='buttonFilter'>
+                        <h1 className="titleFilter">Find the house of your dreams</h1>
+                        {/* <div className='buttonFilter'>
                             <Button >Buy a house</Button>
                             <Button >Rent a house</Button>
-                        </div>
-                        <div className='filter-Selects'>
-                            <Input className="inputPrice" type="select" name="select" placeholder="Filter by Price" >
-                                <option disabled selected>Filter by Price</option>
-                                <option value="600.000" className="option">Up to $60.000</option>
-                                <option value="150000" className="option">Up to $150.000</option>
-                                <option value="150001" className="option">+ $150.000</option>
-                            </Input>
+                        </div> */}
+                        <div className='filterSelects'>
+                            <select onChange={this.inputFilterHome} className="inputSelect" name="price" placeholder="Filter by Price" >
+                                <option className="titleOption" disabled selected>Filter by Price</option>
+                                <option value="60000" className="option">Up to $60.000</option>
+                                <option value="150000" className="option">$60.000 to $150.000</option>
+                                <option value="5000000" className="option">+ $150.000</option>
+                            </select>
                             
-                            <Input className="inputPrice" type="select" name="select" >
-                                <option disabled selected>Order by Date</option>
+                            <select onChange={this.inputFilterHome} className="inputSelect" name="order" >
+                                <option disabled selected>Order by:</option>
                                 <option value="newDate" className="option">Newest</option>
                                 <option value="oldDate" className="option">Oldest</option>
-                            </Input>
-
-                            <Input className="inputPrice" type="select" name="select" >
-                                <option disabled selected>Order by Popularity</option>
-                                <option value="mostPop" className="option">Newest</option>
-                                <option value="leastPop" className="option">Oldest</option>
-                            </Input>
-
-                            <Button onClick={this.searchFilterHome} style={{height: '100%'}}><div className='icono-Busqueda' /* style={{backgroundImage: `url(${iconSearch})`}} */></div>Buscar</Button>
+                                <option value="mostPop" className="option">Most popular</option>
+                                <option value="leastPop" className="option">Least popular</option>
+                            </select>
                         </div>
+                        <button className="btnFilter" onClick={searchFilterHome} >Search</button>
                     </div>
                 </div>
                 <div className="conatinerBanners">
@@ -77,18 +150,47 @@ class Buy extends React.Component {
                     <div className="divBanner" style={{backgroundImage: `url(${divBanner2})`}}></div>
                     <div className="divBanner" style={{backgroundImage: `url(${divBanner3})`}}></div> */}
                 </div>
-                    <div style={{height: '20%'}}>
-                       { this.props.filterHouses.map(house => {
+                <h3 className="titleHouses">Houses</h3>
+                    <div className="mainContainerHouses" style={{height: '20%'}}>
+                        
+                       { this.state.filteredHouse.map(house => {
+                           
                             return (
-                                <div key={house.address} className="card-House">
-                                    <img src={house.photo}></img>
-                                    <img src={house.photo2}></img>
-                                    <div></div>
+                                <div key={house.address} className="containerHouse">
+                                    <div className="containerHousePhoto">
+                                            <div className="divPhoto">
+                                                <img src={house.photo}></img>
+                                            </div>
+                                            <div className="containerHouseDetails">
+                                                    <p><FontAwesomeIcon icon={faMoneyBillAlt}/> {house.price} USD</p>
+                                                    
+                                                        <p className="bath"><FontAwesomeIcon icon={faToilet} /> {house.bathrooms}</p>
+                                                        <p className="bath"><FontAwesomeIcon icon={faBed} /> {house.bedrooms}</p>
+                                                        <p><p>{house.garden ? <> <FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faCheck} /></>: <><FontAwesomeIcon icon={faCross} /> <FontAwesomeIcon icon={faTree} /></>}</p></p>
+                                                    
+                                            </div>
+                                    </div>
+                                    <div className="containerHousePhoto">
+                                        <div className="containerHouseDetails">
+                                            <p>Located at {house.neighborhood} neighborhood</p>
+                                            <p><FontAwesomeIcon icon={faMapMarkedAlt} /> {house.address}</p>
+                                        </div>
+
+                                        <div className="divPhoto">
+                                            <img src={house.photo2}></img>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div className="containerBtn">
+                                        <p>{house.views} people viewed this house</p>
+                                        <NavLink to={`house/${house._id}`}><button  className="btnDetails">View details</button></NavLink>
+                                    </div>
                                 </div>
                             )
                         })}
-                        <h1 style={{textAlign: 'center'}}>listado de casas</h1>
-                </div>
+                        
+                    </div>
                 <Footer/>
 
             </div>
@@ -97,14 +199,13 @@ class Buy extends React.Component {
 }
 
 const mapDispatchToProps = {
-    getHouses: houseActions.getHouses,
-    housesFiltered: houseActions.housesFiltered
+    getHouses: houseActions.getHouses
 }
 
 const mapStateToProps = state => {
     return {
         houses: state.houseRed.allHouses,
-        filterHouses: state.houseRed.allHouses
+       
     }
 }
 

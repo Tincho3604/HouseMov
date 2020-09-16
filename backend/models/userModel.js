@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
             message: () => "That username is already taken"
         }
     },
-    photo:{type:String, required:true},
+    photo:{type:String, default:"https://www.seoptimer.com/es/blog/wp-content/uploads/2016/05/huevo.png"},
     password:{type:String, required:true},
     name:{type:String, required:true},
     surname:{type:String, required:true},
@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
             message: () => "That email is already used"
         }
     },
-    country:{type:String, required:true},
+    country:{type:String, default:"undefined"},
    
 })
 

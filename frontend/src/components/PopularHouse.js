@@ -12,7 +12,7 @@ const PopularHouse = (props) =>{
                 <p><FontAwesomeIcon icon={faToilet} /> {props.house.bathrooms}</p>
                 <p><FontAwesomeIcon icon={faBed} /> {props.house.bedrooms}</p>
                 <p><FontAwesomeIcon icon={faDollarSign} />{props.house.price} USD</p>
-                <p>{props.house.garden ? <><FontAwesomeIcon icon={faCheck} /> <FontAwesomeIcon icon={faTree} /></>: <><FontAwesomeIcon icon={faCross} /> <FontAwesomeIcon icon={faTree} /></>}</p>
+                <p>{props.house.garden ? <> <FontAwesomeIcon icon={faTree} /><FontAwesomeIcon icon={faCheck} /></>: <><FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faCross} /></>}</p>
             </div>
         </div>
          </>

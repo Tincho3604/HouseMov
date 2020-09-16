@@ -32,4 +32,7 @@ router.route('/house/:id')
 .put(houseController.modifyHouse)
 .delete(houseController.deleteHouse)
 
+router.route('/viewsHouse/:id')
+.get(houseController.uploadViews)
+
 module.exports = router
