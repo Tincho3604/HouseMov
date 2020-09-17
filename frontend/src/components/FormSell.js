@@ -44,7 +44,7 @@ class FormSell extends React.Component {
 
     sendData =async  e => {
         e.preventDefault()
-        console.log(this.state.houseSell)
+ 
 
         const errors = this.state.errors 
 

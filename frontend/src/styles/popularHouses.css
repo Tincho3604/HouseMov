@@ -50,6 +50,11 @@ div.details{
     transition: all 0.5s ease;
 }
 
+@media screen and (max-width: 730px) {
+    .house{
+        width: 85%;
+    }
+}   
 
 @media (max-width: 2000px) {
     .containerHouses{

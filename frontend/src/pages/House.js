@@ -5,7 +5,7 @@ import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
 import '../styles/house.css'
 import Header from '../components/Header'
-import { faBed, faCheck, faCross, faDollarSign, faToilet, faTree, faMapMarked, faMapMarkerAlt, faEnvelope, faUserAlt } from '@fortawesome/free-solid-svg-icons'
+import { faBed, faCheck, faTimes, faDollarSign, faToilet, faTree, faMapMarked, faMapMarkerAlt, faEnvelope, faUserAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Footer from '../components/Footer'
 
@@ -28,11 +28,11 @@ class House extends React.Component {
 
     render() {
 
-        console.log(this.state.user)
+  
 
-        if (this.state.house === null) {
+        if (this.state.house === undefined || this.state.house ===null) {
             return null
-        } else if (this.state.house !== null) {
+        } else if (this.state.house !== undefined) {
             var address = this.state.house.address
             var photo = this.state.house.photo
             var photo2 = this.state.house.photo2
@@ -48,28 +48,30 @@ class House extends React.Component {
         return (
             <>
                 <Header />
-
+                <h3 className="titleHouses">House Details</h3>
                 <AliceCarousel mouseTrackingDisabled touchTrackingEnabled={true} autoPlay autoPlayInterval={4000}>
                     <img src={photo} className="photo__house" />
                     <img src={photo2} className="photo__house" />
                 </AliceCarousel>
-
-                <div className="seller__details">
-                    <img src={this.state.user.photo} alt="" />
-                    <p><FontAwesomeIcon icon={faEnvelope} />{"  "}{this.state.user.mail}</p>
-                    <p><FontAwesomeIcon icon={faUserAlt} />{"  "}{this.state.user.name}, {this.state.user.surname}</p>
-                </div>
                 <div className="details__house">
                     <p><FontAwesomeIcon icon={faMapMarked} /> {address}</p>
                     <p><FontAwesomeIcon icon={faMapMarkerAlt} /> {neighborhood}</p>
                     <p>Square Meters: {squareMeters}m2</p>
                     <p><FontAwesomeIcon icon={faToilet} /> {bathrooms}</p>
                     <p><FontAwesomeIcon icon={faBed} /> {bedrooms}</p>
-                    <p>{garden ? <><FontAwesomeIcon icon={faCheck} /> <FontAwesomeIcon icon={faTree} /></> : <><FontAwesomeIcon icon={faCross} /> <FontAwesomeIcon icon={faTree} /></>}</p>
+                    <p>{garden ? <><FontAwesomeIcon icon={faCheck} /> <FontAwesomeIcon icon={faTree} /></> : <><FontAwesomeIcon icon={faTimes} /> <FontAwesomeIcon icon={faTree} /></>}</p>
                 </div>
                 <div className="price__house">
                     <span>${price} USD</span>
                 </div>
+                <div className="seller__details">
+                    <img src={this.state.user.photo} alt="" />
+                    <p><FontAwesomeIcon icon={faEnvelope} />{"  "}{this.state.user.mail}</p>
+                    <p><FontAwesomeIcon icon={faUserAlt} />{"  "}{this.state.user.name}, {this.state.user.surname}</p>
+                </div>
+                
+                
+                
                 <Footer />
             </>
 

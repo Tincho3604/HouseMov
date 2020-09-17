@@ -6,32 +6,50 @@ import SignUp from './pages/SignUp'
 import SignOut from './pages/SignOut'
 import Sell from './pages/Sell'
 import Buy from './pages/Buy'
-import House from './pages/House'
 import { connect } from 'react-redux';
 import userActions from './redux/actions/userActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MyAccount from './pages/MyAccount';
 import MyHouses from './pages/MyHouses'
+import House from './pages/House'
+import EditHouse from'./pages/EditHouse'
 
 class App extends React.Component{
+  
   render(){
 
-
-
+    console.log(this.props)
+    
     if (this.props.token){
     
     
       var routes =
       (
+        
         <Switch>
-          <Route exact path = "/" component={Home}/>
+          {
+          this.props.role === 'sell'
+          ? <><Route exact path = "/" component={Home}/>
           <Route path = "/buy" component = {Buy}/>
           <Route path = "/sell" component = {Sell}/>
           <Route path = "/house/:id" component ={House} />
           <Route path ="/sign-out" component={SignOut} />
           <Route path = "/my-houses" component={MyHouses}/>
+          <Route path = "/modifyHouse/:id" component={EditHouse}/>
           <Route path ="/my-account" component={MyAccount} />
-          <Redirect to ="/"/>
+          <Redirect to ="/"/> </>
+          :
+          <>
+          <Route exact path = "/" component={Home}/>
+          <Route path = "/buy" component = {Buy}/>
+          
+          <Route path = "/house/:id" component ={House} />
+          <Route path ="/sign-out" component={SignOut} />
+          
+          <Route path ="/my-account" component={MyAccount} />
+          <Redirect to ="/"/> </>
+          }
+          
         </Switch>
       ) 
       }
@@ -75,7 +93,8 @@ const mapDispatchToProps ={
 }
 const mapStateToProps = (state) =>{
     return{
-      token: state.userRed.token
+      token: state.userRed.token,
+      role: state.userRed.role
     }
 }
 

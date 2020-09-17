@@ -68,7 +68,7 @@ class SignIn extends React.Component{
             }
         })
         const res = await this.props.getUser(this.state.logUser)
-        console.log(res)
+  
         if(res === true){
             const resp =  await this.props.logUser(this.state.logUser)
 

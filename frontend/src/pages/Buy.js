@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../components/Header'
 import '../styles/buy.css'
-import { faBed, faCheck, faCross, faDollarSign, faMapMarkedAlt, faMoneyBillAlt, faMoneyBillWave, faToilet, faTree } from '@fortawesome/free-solid-svg-icons'
+import { faBed, faCheck, faTimes, faDollarSign, faMapMarkedAlt, faMoneyBillAlt, faMoneyBillWave, faToilet, faTree } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { connect } from 'react-redux'
 import houseActions from '../redux/actions/houseActions'
@@ -146,6 +146,7 @@ class Buy extends React.Component {
                                 <option value="mostPop" className="option">Most popular</option>
                                 <option value="leastPop" className="option">Least popular</option>
                             </select>
+                            
                         </div>
                         <button className="btnFilter" onClick={searchFilterHome} >Search</button>
                     </div>
@@ -171,7 +172,7 @@ class Buy extends React.Component {
                                                     
                                                         <p className="bath"><FontAwesomeIcon icon={faToilet} /> {house.bathrooms}</p>
                                                         <p className="bath"><FontAwesomeIcon icon={faBed} /> {house.bedrooms}</p>
-                                                        <p><p>{house.garden ? <> <FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faCheck} /></>: <><FontAwesomeIcon icon={faCross} /> <FontAwesomeIcon icon={faTree} /></>}</p></p>
+                                                        <p><p>{house.garden ? <> <FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faCheck} /></>: <><FontAwesomeIcon icon={faTimes} /> <FontAwesomeIcon icon={faTree} /></>}</p></p>
                                                     
                                             </div>
                                     </div>

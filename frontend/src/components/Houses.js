@@ -23,7 +23,7 @@ class Houses extends React.Component{
             firstFour:first,
             secondFour: second
         })
-        console.log(this.state)
+
     }
     changeStatus = () =>{
         this.setState({
@@ -32,7 +32,7 @@ class Houses extends React.Component{
         })
     }
     render(){
-        console.log(this.props)
+ 
         return(
             <div className= "containerHouses">
                 <div className="firstFour">
@@ -46,7 +46,9 @@ class Houses extends React.Component{
                 <>
                 <div className ="firstFour">
                     {this.state.secondFour.map(house =>
-                        <PopularHouse house={house}/>
+                        
+                        <PopularHouse key= {house._id} house={house}/>
+                        
                     )}
                         
                 </div>

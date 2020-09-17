@@ -73,7 +73,7 @@
 
 
 div.mainContainerHouses{
-    width: 80%;
+    width: 70%;
     margin: 0 auto;
     
 }
@@ -104,10 +104,10 @@ div.containerHousePhoto{
 
 
 div.containerHousePhoto img{
-    width:100%;
+    width:95%;
     object-fit: cover;
     object-position: center center;
-    height: 40vh;
+    height: 35vh;
     border-radius: 1rem;
     border: solid;
     border-color: #6a92d32d;
@@ -127,7 +127,36 @@ div.containerHouseDetails{
     align-items: center;
     text-align: center;
     
-    
+}
+
+@media (max-width:768px ) {
+    div.containerHouseDetails{
+        font-size: 1.5rem;
+    }
+    div.containerHousePhoto img{
+        width:100%;
+        height: 20vh;
+    }
+    div.mainContainerHouses{
+        width: 90%;
+        margin: 0 auto;
+        
+    }
+}
+
+@media (max-width:472px ) {
+    div.containerHouseDetails{
+        font-size: 1.3rem;
+    }
+    div.containerHousePhoto img{
+        width:100%;
+        height: 15vh;
+    }
+    div.mainContainerHouses{
+        width: 90%;
+        margin: 0 auto;
+        
+    }
 }
 
 div.containerBtn{

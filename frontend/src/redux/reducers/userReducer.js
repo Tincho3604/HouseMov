@@ -9,7 +9,7 @@ const userReducer = (state = initalState, action) =>{
     switch(action.type){
         case "LOG_USER_INTO_APP":
             localStorage.setItem('token', action.payload.token)
-            console.log(action.payload)
+           
             return{
                 ...state, 
                 name: action.payload.name,

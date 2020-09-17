@@ -2,7 +2,10 @@ import React from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import FormSell from '../components/FormSell'
-const Sell = () =>{
+import { connect } from 'react-redux'
+const Sell = (props) =>{
+
+    console.log(props)
     return(
         <>
         <Header />
@@ -12,4 +15,10 @@ const Sell = () =>{
     )
 }
 
-export default Sell
+const mapStateToProps =(state) =>{
+    return{
+        userLogued: state.userLogued
+    }
+}
+
+export default connect (mapStateToProps) (Sell)

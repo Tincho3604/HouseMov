@@ -102,21 +102,33 @@ const userController={
 
     modifyUser: async (req, res) => {
         var id= req.user._id
-        var {name, photo, user, surname, role, email, country} = req.body
-        
+        var {name, photo, surname, role, country} = req.body
+
         try{
-            await User.findOneAndUpdate(
-                {_id:id},
-                {name, photo, user, surname, role, email, country}
+            
+            await User.updateOne(
+                {_id:id},{name: name.trim().charAt(0).toUpperCase() + name.slice(1),
+                    surname: surname.trim().charAt(0).toUpperCase() + surname.slice(1),
+                    role,
+                    country: country.trim().charAt(0).toUpperCase() + country.slice(1),
+                    photo: photo.trim()}
+                
             )
+ 
             res.json({
                 success: true,
-                response: "User modified"
+                response: {
+                    name,
+                    photo,
+                    role
+                }
             })
+            
         }catch{
             res.json({
                 success: false,
-                response:"Error modifying user"})
+                response:"Error modifying user"
+            })
         }
     },
 

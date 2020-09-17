@@ -30,14 +30,14 @@ const houseActions = {
         }
     },
     uploadHouse:(newHouse, token) =>{
-        console.log(newHouse, token)
+      
         return async (dispatch, getState)=>{
             const res = await axios.put('http://localhost:4000/api/houses',newHouse ,{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
-            console.log(res.data)
+    
             dispatch({
                 type: 'UPLOAD_HOUSE'
             })
@@ -47,7 +47,7 @@ const houseActions = {
     uploadViews: (houseId) =>{
         return async(dispatch, getState) =>{
             const res = await axios.get('http://localhost:4000/api/viewsHouse/'+houseId)
-            console.log(res)
+    
             dispatch({
                 type:'UPLOAD_VIEWS'
             })
@@ -68,6 +68,15 @@ const houseActions = {
             })
             
             return (housesUser)
+        }
+    },
+    sendModifyHouse:(house, id) =>{
+        return async (dispatch, getState) =>{
+            const response = await axios.put('http://localhost:4000/api/house/'+ id, house)
+            dispatch({
+                type: "MODIFY_HOUSE"
+            })
+            return response
         }
     }
 }

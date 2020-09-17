@@ -5,10 +5,12 @@ import Header from '../components/Header'
 
 class MyAccount extends React.Component{
     render(){
+        
         return(
             <>
             <Header />
-            <FormEdit />
+            <h3 className="titleHouses">Edit your account</h3>
+            <FormEdit history = {this.props.history} />
             <Footer/>
             
             </>

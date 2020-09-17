@@ -17,7 +17,7 @@ router.route('/fullUser')
 .get(passport.authenticate('jwt', {session: false}), userController.getFullUser)
 
 router.route('/modifyUser')
-.put(userController.validateUser, userController.modifyUser)
+.put(passport.authenticate('jwt', {session: false}), userController.modifyUser)
 
 router.route('/login')
 .post(userController.logUser)
@@ -38,7 +38,7 @@ router.route('/houseByUser')
 router.route('/house/:id')
 .get(houseController.getHouseById)
 .put(houseController.modifyHouse)
-.delete(houseController.deleteHouse)
+
 
 router.route('/viewsHouse/:id')
 .get(houseController.uploadViews)

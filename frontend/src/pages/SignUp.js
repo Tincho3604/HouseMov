@@ -41,7 +41,7 @@ class SignUp extends React.Component{
                 [property]: value
             }
         })
-        console.log(this.state)
+   
     }
     submit = async e =>{
         
@@ -115,16 +115,16 @@ class SignUp extends React.Component{
     }
     
     responseGoogle = async (response) =>{
-        console.log(response)
+
         this.setState({
             ...this.state,
             newUser:{
                 user:response.profileObj.email,
-                password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, ""),
+                password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
                 name:response.profileObj.givenName,
-                surname:response.profileObj.familyName,
+                surname:response.profileObj.familyName.trim(),
                 mail: response.profileObj.email,
-                passwordValidation:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, ""),
+                passwordValidation:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase(),
                 role:"undefined"
             }
         })

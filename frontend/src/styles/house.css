@@ -46,9 +46,8 @@
 }
 .price__house span{
     font-size: 2rem;
-    background-color:  #6a93d3;
+    background-color:  #212e42;
     color: whitesmoke;
-    
     padding: 0.5em;
     border-radius: 10px;
     font-weight: bolder;
@@ -89,7 +88,7 @@
 @media only screen and (max-width: 1500px) {
     .photo__house{
         margin-left:20em;
-        margin-top: 8em;
+        margin-top: 0em;
     }
 
     .details__house{
@@ -101,12 +100,12 @@
 @media only screen and (max-width: 1200px) {
     .photo__house{
         margin-left: 20em;
-        margin-top: 8em;
+        margin-top: 0em;
     }
 
     .details__house{
         font-size: 1.7rem;
-        margin: 1em 8em;
+        margin: 0em 8em;
         padding: 3rem;
     }
 

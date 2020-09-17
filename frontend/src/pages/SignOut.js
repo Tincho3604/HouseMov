@@ -4,6 +4,7 @@ import userActions from '../redux/actions/userActions'
 
 const LogOut = (props) =>{
     useEffect(()=> {
+     
         props.unlogUser()
         props.history.push('/')
     }, [])
