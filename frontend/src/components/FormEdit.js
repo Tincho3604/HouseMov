@@ -151,7 +151,7 @@ class FormEdit extends React.Component{
                     <input className="pic" type="text" value={this.state.userMod.photo} name="photo" onChange={this.getForm}></input>
  */}
 
-                    <label className="labelEdit" htmlFor="country">Select your file:</label>
+                    <label className="labelEdit" htmlFor="country">Your photo:</label>
                     <span className={this.state.errors.photo === "" ? "" : "logError"}>{this.state.errors.photo}</span>
                     <input className="pic" type="file" name="photo" onChange={this.getForm}></input>
 

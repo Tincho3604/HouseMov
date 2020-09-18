@@ -40,7 +40,7 @@ class ForgotPass extends React.Component{
             const sendMail = await this.props.sendMail(this.state.email) 
             if (sendMail === false){
                 this.setState({
-                    error: "error 404"
+                    error: "That email address is not associated with an existing account"
                 })   
                 this.setState({
                     ...this.state,
