@@ -18,7 +18,7 @@ class Buy extends React.Component {
     }
 
     async componentDidMount() {
-            window.scrollTo(0, 0)
+        window.scrollTo({top: 0, behavior: 'smooth'})
          await this.props.getHouses()
 
          this.setState({
@@ -172,7 +172,7 @@ class Buy extends React.Component {
                                                     
                                                         <p className="bath"><FontAwesomeIcon icon={faToilet} /> {house.bathrooms}</p>
                                                         <p className="bath"><FontAwesomeIcon icon={faBed} /> {house.bedrooms}</p>
-                                                        <p><p>{house.garden ? <> <FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faCheck} /></>: <><FontAwesomeIcon icon={faTimes} /> <FontAwesomeIcon icon={faTree} /></>}</p></p>
+                                                        <p><p>{house.garden ? <> <FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faCheck} /></>: <> <FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faTimes} /> </>}</p></p>
                                                     
                                             </div>
                                     </div>

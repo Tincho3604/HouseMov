@@ -39,8 +39,14 @@ router.route('/house/:id')
 .get(houseController.getHouseById)
 .put(houseController.modifyHouse)
 
+router.route('/modifyUser1')
+.put(passport.authenticate('jwt', {session: false}), userController.modifyUser1)
 
 router.route('/viewsHouse/:id')
 .get(houseController.uploadViews)
+
+router.route('/sendMail')
+.put(userController.getNewPass)
+
 
 module.exports = router

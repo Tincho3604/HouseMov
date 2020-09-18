@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 
 
 
+
 class FormEdit extends React.Component{
     state = {
         userMod:{
@@ -45,15 +46,16 @@ class FormEdit extends React.Component{
     }
 
     getForm = async e =>{
+        const value = e.target.name === "photo" ? e.target.files[0] : e.target.value
         const property = e.target.name
-        const value = e.target.value
+        /* const value = e.target.value */
         await this.setState({
             userMod:{
                 ...this.state.userMod,
                 [property]: value
             }
         })
-     
+        console.log(this.state)
        
     }
 
@@ -83,16 +85,40 @@ class FormEdit extends React.Component{
         })
     
         if ( this.state.errors.name=== "" && this.state.errors.surname=== "" &&  this.state.errors.photo=== "" && this.state.errors.country=== "" ){
-
-             const response = await this.props.modAccount(this.props.token, this.state.userMod)
-         
-             if (response.success === true){
-                await Swal.fire({  title: 'User Modified!',  text: `enjoy`,  icon: 'success',  showConfirmButton: false, timer: 3000, allowOutsideClick: false})
-                this.props.history.push('/')
-            }else{
-                await Swal.fire({  title: 'User was not modified!',  text: `Due to error, try again`,  icon: 'warning',  showConfirmButton: false, timer: 3000,allowOutsideClick: false})
-                this.props.history.push('/')
-            }
+            console.log(typeof(this.state.userMod.photo))
+            if (typeof(this.state.userMod.photo) === "object") {
+                console.log(this.state)
+                
+                const fd = new FormData()
+                fd.append('name', this.state.userMod.name) 
+                fd.append('surname', this.state.userMod.surname) 
+                fd.append('country', this.state.userMod.country) 
+                fd.append('role', this.state.userMod.role) 
+                fd.append('photo', this.state.userMod.photo) 
+                console.log(fd)
+    
+                 const response = await this.props.modAccount(this.props.token, fd)
+                 if (response.success === true){
+                    this.props.history.push('/')
+                }else{
+                    this.props.history.push('/')
+                }
+    
+                } else {
+                    const userToMod = {
+                        name: this.state.userMod.name,
+                        surname: this.state.userMod.surname,
+                        country: this.state.userMod.country,
+                        role: this.state.userMod.role
+                    }
+                    const response1 = await this.props.modAccount1(this.props.token, userToMod)
+                    if (response1.success === true){
+                        this.props.history.push('/')
+                    }else{
+                        this.props.history.push('/')
+                    }
+        
+                }
         } 
         
     }
@@ -121,9 +147,16 @@ class FormEdit extends React.Component{
                     <label className="labelEdit" htmlFor="country">Your country:</label>
                     <input className="country" id="country" type="text" placeholder={this.state.userMod.country === "Undefined" || this.state.userMod.country === "undefined" ? "You dont have a country loaded" : this.state.userMod.country } name="country" onChange={this.getForm}></input>
                     
-                    <label className="labelEdit" htmlFor="country">Your photo:</label>
+                    {/* <label className="labelEdit" htmlFor="photo">Your photo:</label>
                     <span className={this.state.errors.photo === "" ? "" : "logError"}>{this.state.errors.photo}</span>
                     <input className="pic" type="text" value={this.state.userMod.photo} name="photo" onChange={this.getForm}></input>
+ */}
+
+                    <label className="labelEdit" htmlFor="country">Select your file:</label>
+                    <span className={this.state.errors.photo === "" ? "" : "logError"}>{this.state.errors.photo}</span>
+                    <input className="pic" type="file" name="photo" onChange={this.getForm}></input>
+
+
 
                             <label className="labelEdit" htmlFor="role">Your want to:</label>
                             <select value={this.state.userMod.role} id="role" onChange={this.getForm} className="inputRole" name="role" >
@@ -143,7 +176,8 @@ class FormEdit extends React.Component{
 
 const mapDispatchToProps = {
     getUser: userActions.getFullUser,
-    modAccount: userActions.modAccount
+    modAccount: userActions.modAccount,
+    modAccount1: userActions.modAccount1,
 }
 const mapStateToProps = (state) =>{
     return{

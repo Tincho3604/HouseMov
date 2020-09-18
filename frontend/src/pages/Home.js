@@ -11,7 +11,7 @@ import Footer from '../components/Footer'
 class Home extends React.Component{
     
     async componentDidMount(){
-        window.scrollTo(0, 0)
+        window.scrollTo({top: 0, behavior: 'smooth'})
         await this.props.getHouses()
     }
     

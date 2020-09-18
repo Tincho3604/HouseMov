@@ -8,6 +8,7 @@ import GoogleLogin from 'react-google-login';
 
 import Swal from 'sweetalert2'
 import Footer from '../components/Footer';
+import { NavLink } from 'react-router-dom';
 
 
 class SignIn extends React.Component{
@@ -47,10 +48,6 @@ class SignIn extends React.Component{
             
             if (response.success === true){
                 
-                
-                
-                
-                
             }else{
                 this.setState({
                     error: response
@@ -64,7 +61,7 @@ class SignIn extends React.Component{
             ...this.state,
             logUser:{
                 user:response.profileObj.email,
-                password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")
+                password:response.profileObj.googleId+response.profileObj.familyName.replace(/ /g, "")+response.profileObj.familyName.trim().charAt(0).toUpperCase() + response.profileObj.familyName.trim().charAt(0).toLowerCase()
             }
         })
         const res = await this.props.getUser(this.state.logUser)
@@ -102,7 +99,9 @@ class SignIn extends React.Component{
                     <input className="account" name="user" type="text" placeholder="Enter your user" onChange={this.getForm}></input>
                     <input className="password" type="password" name="password" placeholder="Enter your password" onChange={this.getForm}></input>
                  </div>
+                    
                     <button onClick={this.submit} className="send">Sign In</button>
+                    <NavLink to="/forgotPass" style={{fontSize:"1.4rem"}}>I forgot my password</NavLink>
                     <p className="or">Or</p>
                     <GoogleLogin
                         className="googleBtn"

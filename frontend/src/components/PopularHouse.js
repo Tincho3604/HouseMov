@@ -1,6 +1,6 @@
 import React from 'react'
 import '../styles/popularHouses.css'
-import { faBed, faCheck, faTimes, faDollarSign, faToilet, faTree } from '@fortawesome/free-solid-svg-icons'
+import { faBed, faCheck, faTimes, faDollarSign, faToilet, faTree, faMoneyBillAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const PopularHouse = (props) =>{
 
@@ -11,7 +11,7 @@ const PopularHouse = (props) =>{
             <div className="details">
                 <p><FontAwesomeIcon icon={faToilet} /> {props.house.bathrooms}</p>
                 <p><FontAwesomeIcon icon={faBed} /> {props.house.bedrooms}</p>
-                <p><FontAwesomeIcon icon={faDollarSign} />{props.house.price} USD</p>
+                <p><FontAwesomeIcon icon={faMoneyBillAlt}/> {props.house.price} USD</p>
                 <p>{props.house.garden ? <> <FontAwesomeIcon icon={faTree} /><FontAwesomeIcon icon={faCheck} /></>: <><FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faTimes} /></>}</p>
             </div>
         </div>

@@ -13,6 +13,7 @@ import MyAccount from './pages/MyAccount';
 import MyHouses from './pages/MyHouses'
 import House from './pages/House'
 import EditHouse from'./pages/EditHouse'
+import ForgotPass from './pages/ForgotPass';
 
 class App extends React.Component{
   
@@ -45,7 +46,7 @@ class App extends React.Component{
           
           <Route path = "/house/:id" component ={House} />
           <Route path ="/sign-out" component={SignOut} />
-          
+          <Route path = "/forgotPass" component={ForgotPass} />
           <Route path ="/my-account" component={MyAccount} />
           <Redirect to ="/"/> </>
           }
@@ -71,8 +72,9 @@ class App extends React.Component{
             
             <Route path = "/sign-in" component={SignIn}/>
             <Route path = "/sign-up" component={SignUp}/>
+            <Route path = "/forgotPass" component={ForgotPass} />
             <Redirect to="/sign-in" component={SignIn}/>
-    
+          
           </Switch>
         )
       }

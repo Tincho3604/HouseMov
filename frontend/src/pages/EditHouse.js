@@ -8,7 +8,9 @@ import Header from '../components/Header'
 
 class MyAccount extends React.Component{
     
-    
+    componentDidMount(){
+        window.scrollTo({top: 0, behavior: 'smooth'})
+    }
     
     render(){
         console.log(this.props)

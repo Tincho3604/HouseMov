@@ -49,22 +49,25 @@ class House extends React.Component {
             <>
                 <Header />
                 <h3 className="titleHouses">House Details</h3>
-                <AliceCarousel mouseTrackingDisabled touchTrackingEnabled={true} autoPlay autoPlayInterval={4000}>
-                    <img src={photo} className="photo__house" />
-                    <img src={photo2} className="photo__house" />
-                </AliceCarousel>
                 <div className="details__house">
                     <p><FontAwesomeIcon icon={faMapMarked} /> {address}</p>
                     <p><FontAwesomeIcon icon={faMapMarkerAlt} /> {neighborhood}</p>
                     <p>Square Meters: {squareMeters}m2</p>
                     <p><FontAwesomeIcon icon={faToilet} /> {bathrooms}</p>
                     <p><FontAwesomeIcon icon={faBed} /> {bedrooms}</p>
-                    <p>{garden ? <><FontAwesomeIcon icon={faCheck} /> <FontAwesomeIcon icon={faTree} /></> : <><FontAwesomeIcon icon={faTimes} /> <FontAwesomeIcon icon={faTree} /></>}</p>
+                    <p>{garden ? <> <FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faCheck} /> </> : <><FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faTimes} /> </>}</p>
                 </div>
                 <div className="price__house">
                     <span>${price} USD</span>
                 </div>
+                <AliceCarousel mouseTrackingDisabled touchTrackingEnabled={true} autoPlay autoPlayInterval={4000}>
+                    <img src={photo} className="photo__house" />
+                    <img src={photo2} className="photo__house" />
+                </AliceCarousel>
+                
+                
                 <div className="seller__details">
+    
                     <img src={this.state.user.photo} alt="" />
                     <p><FontAwesomeIcon icon={faEnvelope} />{"  "}{this.state.user.mail}</p>
                     <p><FontAwesomeIcon icon={faUserAlt} />{"  "}{this.state.user.name}, {this.state.user.surname}</p>

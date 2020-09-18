@@ -37,7 +37,9 @@
     width: 80%;
     margin-top: 1rem;
 }
-
+@media (min-width: 768px) {
+    
+}
 .inputSelect{
     display: flex;
     margin: auto;
@@ -70,7 +72,29 @@
     -webkit-transition: all 0.2s ease;
     transition: all 1s ease-in-out;
 }
-
+@media (max-width: 768px) {
+    .filterSelects{
+        display:flex;
+        flex-direction: column;
+        width: 80%;
+        margin-top: 1rem;
+    }
+    .divFilter {
+        width: 80%;
+        height: 60%; 
+        
+    }
+    .inputSelect{
+        display: flex;
+        margin: 1rem auto;
+        width: 80%;
+    }
+    .btnFilter{
+        margin: 1rem auto;
+        padding: 1rem 2rem;
+        width: 60%;
+    }
+}
 
 div.mainContainerHouses{
     width: 70%;

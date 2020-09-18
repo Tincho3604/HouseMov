@@ -200,3 +200,7 @@ border-radius: 1rem;
  
 }
 
+.send:disabled{
+  color: #434343;
+  background-color: #434343;
+}

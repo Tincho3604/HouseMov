@@ -6,13 +6,13 @@ import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { connect } from 'react-redux'
 const Header = (props) => {
 
-
+    console.log(props.userLogged)
     return (
         <header>
 
             <div className="header">
                 <div className="headerContent">
-                    <h3 className="logo">HouseMuv</h3>
+                    <img className="logo" src={require('../images/logo.png')}></img>
                     <nav className="nav">
                         {props.userLogged.token == ""
                             ?

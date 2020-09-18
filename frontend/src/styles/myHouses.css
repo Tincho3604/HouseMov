@@ -94,3 +94,40 @@ div.details1 p:last-of-type{
     -webkit-transition: all 0.2s ease;
     transition: all 1s ease-in-out;
 }
+
+.message{
+    width: 60%;
+    height: 60vh;
+    background-color: #212e42;
+    margin: 2rem auto;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    color: whitesmoke;
+    font-size: 2rem;
+    border-radius: 2rem;
+}
+
+.iconmes{
+    font-size: 7rem;
+}
+
+@media (max-width: 768px) {
+    .message{
+        width: 90%;
+        height: 90vh;
+        font-size: 1.3rem;
+        padding: 1rem;
+    }
+}
+
+@media (max-width:450px) {
+    .message{
+        width: 90%;
+        height: 60vh;
+        font-size: 1.3rem;
+        padding: 1rem;
+    }
+}

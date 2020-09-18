@@ -2,6 +2,18 @@ const User = require('../models/userModel')
 const Joi = require('@hapi/joi')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const nodeMailer = require('nodemailer')
+
+
+var transport = nodeMailer.createTransport({
+    port:465, 
+    host:"smtp.gmail.com",
+    auth: {
+        pass: "123456789Emi",
+        user: "emiruffini5@gmail.com"
+    },
+    tls: { rejectUnauthorized: false }
+})
 
 const userController={
     getUser: async (req, res) => {
@@ -100,7 +112,7 @@ const userController={
         }
     },
 
-    modifyUser: async (req, res) => {
+    /* modifyUser: async (req, res) => {
         var id= req.user._id
         var {name, photo, surname, role, country} = req.body
 
@@ -124,6 +136,94 @@ const userController={
                 }
             })
             
+        }catch{
+            res.json({
+                success: false,
+                response:"Error modifying user"
+            })
+        }
+    } */modifyUser: async (req, res) => {
+        console.log(req.files)
+        console.log(req.body)
+        console.log(req.user)
+        var id= req.user._id
+        var {name, surname, role, country} = req.body
+        const image = req.files.photo
+        var extension = req.files.photo.mimetype
+
+        if (extension === 'image/png') {
+            extension = 'png'
+        } else if (extension === 'image/jpeg') {
+            extension = 'jpeg'
+        } else {
+            return alert('ponga otra extension de imagen')
+        }
+
+        const nameFile = `${id}.${extension}`
+
+        const serverURL = `${__dirname}/uploads/${nameFile}`
+
+        // dirección de archivo local, CAMBIAR A HEROKU
+        const urlFile = `http://localhost:4000/uploads/${nameFile}`
+
+        image.mv(serverURL)
+
+        try{
+            
+            await User.updateOne(
+                {_id:id},{name: name.trim().charAt(0).toUpperCase() + name.slice(1),
+                    surname: surname.trim().charAt(0).toUpperCase() + surname.slice(1),
+                    role,
+                    country: country.trim().charAt(0).toUpperCase() + country.slice(1),
+                    photo: urlFile
+                }
+                
+            )
+ 
+            const user = await User.findOne({_id:id})
+            
+                    res.json({success: true, response:{
+                        
+                        name: user.name,
+                        photo: urlFile,
+                        role: user.role
+                        }
+                    })
+             
+            
+        }catch{
+            res.json({
+                success: false,
+                response:"Error modifying user"
+            })
+        }
+    },
+
+    modifyUser1: async (req, res) => {
+        console.log(req)
+        var id= req.user._id
+        var {name, surname, role, country} = req.body
+
+        try{
+            await User.updateOne(
+                {_id:id},{name: name.trim().charAt(0).toUpperCase() + name.slice(1),
+                    surname: surname.trim().charAt(0).toUpperCase() + surname.slice(1),
+                    role,
+                    country: country.trim().charAt(0).toUpperCase() + country.slice(1),
+                }
+                
+            )
+
+            const user = await User.findOne({_id:id})
+            
+                    res.json({success: true, response:{
+                        
+                        name: user.name,
+                        photo: user.photo,
+                        role: user.role
+                    }})
+                    
+        
         }catch{
             res.json({
                 success: false,
@@ -208,8 +308,49 @@ const userController={
                 success: false,
                 response:"Error geting user"})
         }
-    }
+    },
+    getNewPass: async (req, res) =>{
+        mailSent = req.body.mail
 
+        try{
+            
+            await User.findOne({mail:mailSent})
+            
+            var length = 8
+            var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            var newPass = ""
+            for (var i = 0, n = charset.length; i < length; ++i) {
+                newPass += charset.charAt(Math.floor(Math.random() * n));
+            }
+            const passwordHashed = bcryptjs.hashSync(newPass, 10)
+            
+                const user = await User.findOneAndUpdate({mail: mailSent}, {password: passwordHashed})
+                console.log(user)
+                var mailOptions = {
+                    from: "HouseMuv <notresponse@notreply.com>",
+                    sender: "HouseMuv <notresponse@notreply.com>",
+                    to: `${user.mail}`,
+                    subject: "New Password",
+                    html:  `<div>
+                    <h1>This is your new password:${newPass}, continue using HouseMuv :)</h1>
+                    <h2>Please sign up again<h2>        
+                    </>`,
+                }
+                transport.sendMail(mailOptions, (error, info) => {
+                    console.log(error)
+                    console.log(info)
+                    res.send("email enviado")
+                })
+
+           
+
+        }catch(error){
+            res.json({
+                success:false,
+                response: "Error getting account"
+            })
+        }
+    }
 }
 
 

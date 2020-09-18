@@ -109,29 +109,70 @@ const userActions = {
             return res.data.response.userToSend
         }
     },
-    modAccount: (token, user) =>{
-       
+    modAccount: (token, fd) =>{
+        console.log(token)
+        console.log(fd)
         return async(dispatch, getState) =>{
-            const res = await axios.put("http://localhost:4000/api/modifyUser",user ,{
+            const res = await axios.put("http://localhost:4000/api/modifyUser", fd,{
             headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
                 }
             })
          
+                console.log(res.data.response)
+                if (res.data.success){
+                    await Swal.fire({  title: 'User Modified!',  text: `Please wait, we are uploading your data`,  icon: 'success',  showConfirmButton: false, timer: 5000, allowOutsideClick: false})
+                    dispatch({
+                        type: "LOG_USER_INTO_APP",
+                        payload:{
+                            token,
+                            name: res.data.response.name,
+                            role: res.data.response.role,
+                            photo: res.data.response.photo
+                        }
+                    })
+                    return {
+                        success: true,
+                        user: res.data.success
+                    }
+                }else{
+                    await Swal.fire({  title: 'User not Modified!',  text: `Please try again`,  icon: 'warning',  showConfirmButton: false, timer: 5000, allowOutsideClick: false})
+                }
             
+        }
+    },
+
+    modAccount1: (token, userMod) =>{
+        console.log(token)
+        console.log(userMod)
+
+        return async(dispatch, getState) =>{
+            const res = await axios.put("http://localhost:4000/api/modifyUser1", {...userMod},{
+            headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+         
+            console.log(res)
+            if (res.data.success){
+                await Swal.fire({  title: 'User Modified!',  text: `enjoy`,  icon: 'success',  showConfirmButton: false, timer: 5000, allowOutsideClick: false})
                 dispatch({
                     type: "LOG_USER_INTO_APP",
                     payload:{
                         token,
                         name: res.data.response.name,
-                        photo: res.data.response.photo,
-                        role: res.data.response.role
+                        role: res.data.response.role,
+                        photo: res.data.response.photo
                     }
                 })
                 return {
                     success: true,
                     user: res.data.success
                 }
+            }else{
+                await Swal.fire({  title: 'User not Modified!',  text: `Please try again`,  icon: 'warning',  showConfirmButton: false, timer: 4000, allowOutsideClick: false})
+            }
             
         }
     }
