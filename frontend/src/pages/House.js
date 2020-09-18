@@ -8,6 +8,9 @@ import Header from '../components/Header'
 import { faBed, faCheck, faTimes, faDollarSign, faToilet, faTree, faMapMarked, faMapMarkerAlt, faEnvelope, faUserAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Footer from '../components/Footer'
+import Comments from '../components/Comments'
+import '../styles/comments.css'
+
 
 class House extends React.Component {
 
@@ -72,7 +75,10 @@ class House extends React.Component {
                     <p><FontAwesomeIcon icon={faEnvelope} />{"  "}{this.state.user.mail}</p>
                     <p><FontAwesomeIcon icon={faUserAlt} />{"  "}{this.state.user.name}, {this.state.user.surname}</p>
                 </div>
-                
+                <div className="commentsContainer ">
+                    <h4 className="title">Ask a question about this house</h4>
+                    <Comments idHouse = {this.props.match.params.id}/>
+                 </div>
                 
                 
                 <Footer />

@@ -5,7 +5,7 @@ import FormSell from '../components/FormSell'
 import { connect } from 'react-redux'
 const Sell = (props) =>{
 
-    console.log(props)
+  
     return(
         <>
         <Header />

@@ -143,9 +143,7 @@ const userController={
             })
         }
     } */modifyUser: async (req, res) => {
-        console.log(req.files)
-        console.log(req.body)
-        console.log(req.user)
+        
         var id= req.user._id
         var {name, surname, role, country} = req.body
         const image = req.files.photo
@@ -200,7 +198,7 @@ const userController={
     },
 
     modifyUser1: async (req, res) => {
-        console.log(req)
+        
         var id= req.user._id
         var {name, surname, role, country} = req.body
 
@@ -325,7 +323,7 @@ const userController={
             const passwordHashed = bcryptjs.hashSync(newPass, 10)
             
                 const user = await User.findOneAndUpdate({mail: mailSent}, {password: passwordHashed})
-                console.log(user)
+             
                 var mailOptions = {
                     from: "HouseMuv <notresponse@notreply.com>",
                     sender: "HouseMuv <notresponse@notreply.com>",
@@ -337,8 +335,7 @@ const userController={
                     </>`,
                 }
                 transport.sendMail(mailOptions, (error, info) => {
-                    console.log(error)
-                    console.log(info)
+                  
                     res.send("email enviado")
                 })
 

@@ -1,6 +1,6 @@
 const House = require('../models/HouseModel')
 const User = require('../models/userModel')
-
+const Comment = require("../models/commentModel")
 
 const houseController={
     getHouse: async (req, res) => {
@@ -70,7 +70,7 @@ const houseController={
                 {_id:id},
                 {address, neighborhood, squareMeters, bedrooms, bathrooms, price, garden}
             )
-            console.log(houseMod)
+            
             res.json({
                 success: true,
                 response: "House modified"
@@ -138,9 +138,49 @@ const houseController={
                     success: false,
                     response: error
                 })
-            }
-        },
-    
+        }
+    },
+    getCommentsByHouseId: async (req, res) =>{
+        var houseId = req.params.id
+        try{
+            var comments = await Comment.find({houseId})
+            res.json({
+                success: true,
+                response: comments
+            })
+        }catch{
+            res.json({
+                success: false,
+                response: "Failed to get comments"
+            })
+        }
+    },
+    commentHouse: async (req, res) =>{
+      
+        var user = req.user.user
+        var houseId = req.params.id
+        var comment = req.body.newComment
+        
+        const newComment = new Comment({
+            houseId,
+            user,
+            comment
+        })
+       
+        try{
+            await newComment.save()
+            res.json({
+                success: true, 
+                response: "Comment saved"
+            })
+        
+        }catch(error){
+            res.json({
+                success: false,
+                response: error 
+            })
+        }
+    },
     
 
 }

@@ -55,8 +55,7 @@ class FormEdit extends React.Component{
                 [property]: value
             }
         })
-        console.log(this.state)
-       
+        
     }
 
     submit = async (e, props) =>{
@@ -85,9 +84,9 @@ class FormEdit extends React.Component{
         })
     
         if ( this.state.errors.name=== "" && this.state.errors.surname=== "" &&  this.state.errors.photo=== "" && this.state.errors.country=== "" ){
-            console.log(typeof(this.state.userMod.photo))
+      
             if (typeof(this.state.userMod.photo) === "object") {
-                console.log(this.state)
+          
                 
                 const fd = new FormData()
                 fd.append('name', this.state.userMod.name) 
@@ -95,7 +94,7 @@ class FormEdit extends React.Component{
                 fd.append('country', this.state.userMod.country) 
                 fd.append('role', this.state.userMod.role) 
                 fd.append('photo', this.state.userMod.photo) 
-                console.log(fd)
+           
     
                  const response = await this.props.modAccount(this.props.token, fd)
                  if (response.success === true){

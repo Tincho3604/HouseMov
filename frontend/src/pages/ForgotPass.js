@@ -23,7 +23,7 @@ class ForgotPass extends React.Component{
             error:""
         })
         
-        console.log(this.state)
+    
     }
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import '../styles/popularHouses.css'
-
+import '../styles/comments.css'
 import PopularHouse from './PopularHouse'
 
 class Houses extends React.Component{
