@@ -20,7 +20,7 @@ const userActions = {
                 return error
                
             }else{
-                console.log(res.data)
+              
                 await Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you here, ${res.data.response.name}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
                 dispatch({
                     type: "LOG_USER_INTO_APP",
@@ -110,8 +110,7 @@ const userActions = {
         }
     },
     modAccount: (token, fd) =>{
-        console.log(token)
-        console.log(fd)
+      
         return async(dispatch, getState) =>{
             const res = await axios.put("http://localhost:4000/api/modifyUser", fd,{
             headers: {
@@ -120,9 +119,9 @@ const userActions = {
                 }
             })
          
-                console.log(res.data.response)
+        
                 if (res.data.success){
-                    await Swal.fire({  title: 'User Modified!',  text: `Please wait, we are uploading your data`,  icon: 'success',  showConfirmButton: false, timer: 5000, allowOutsideClick: false})
+                    await Swal.fire({  title: 'User Modified!',  text: `Please wait, we are uploading your data`,  icon: 'success',  showConfirmButton: false, timer: 6000, allowOutsideClick: false})
                     dispatch({
                         type: "LOG_USER_INTO_APP",
                         payload:{
@@ -137,15 +136,14 @@ const userActions = {
                         user: res.data.success
                     }
                 }else{
-                    await Swal.fire({  title: 'User not Modified!',  text: `Please try again`,  icon: 'warning',  showConfirmButton: false, timer: 5000, allowOutsideClick: false})
+                    await Swal.fire({  title: 'User not Modified!',  text: `Please try again`,  icon: 'warning',  showConfirmButton: false, timer: 6000, allowOutsideClick: false})
                 }
             
         }
     },
 
     modAccount1: (token, userMod) =>{
-        console.log(token)
-        console.log(userMod)
+     
 
         return async(dispatch, getState) =>{
             const res = await axios.put("http://localhost:4000/api/modifyUser1", {...userMod},{
@@ -154,9 +152,9 @@ const userActions = {
                 }
             })
          
-            console.log(res)
+        
             if (res.data.success){
-                await Swal.fire({  title: 'User Modified!',  text: `enjoy`,  icon: 'success',  showConfirmButton: false, timer: 5000, allowOutsideClick: false})
+                await Swal.fire({  title: 'User Modified!',  text: `enjoy`,  icon: 'success',  showConfirmButton: false, timer: 6000, allowOutsideClick: false})
                 dispatch({
                     type: "LOG_USER_INTO_APP",
                     payload:{
@@ -171,11 +169,46 @@ const userActions = {
                     user: res.data.success
                 }
             }else{
-                await Swal.fire({  title: 'User not Modified!',  text: `Please try again`,  icon: 'warning',  showConfirmButton: false, timer: 4000, allowOutsideClick: false})
+                await Swal.fire({  title: 'User not Modified!',  text: `Please try again`,  icon: 'warning',  showConfirmButton: false, timer:6000, allowOutsideClick: false})
             }
             
         }
-    }
+    },getComments: (idHouse) =>{
+        return async (dispatch, getState) =>{
+            const res = await axios.get("http://localhost:4000/api/houseComment/"+idHouse)
+            dispatch({
+                type: "GET_COMMENTS"
+            })
+            return (res.data.response)
+        }
+    } ,
+    /* deleteComment: (idComment) =>{
+        return async (dispatch, getState) =>{
+            const res = await axios.delete("https:/localhost:4000/api/houseComment+idComment)
+            dispatch({
+                type: "DELETE_COMMENTS"
+            })
+        }
+        
+    }, */
+    commentItinerary: (token, idHouse, comment) => {
+        
+            var id = idHouse
+            var newComment = comment
+        return async (dispatch, getState) =>{
+           
+            const res = await axios.post(`http://localhost:4000/api/houseComment/${id}`,{newComment},{
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            
+            dispatch({
+                type: "POST_COMMENT"
+            })
+        }
+
+    } 
 }
 
 export default userActions

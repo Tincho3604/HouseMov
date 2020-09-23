@@ -49,4 +49,9 @@ router.route('/sendMail')
 .put(userController.getNewPass)
 
 
+router.route('/houseComment/:id')
+.get(houseController.getCommentsByHouseId)
+.post(passport.authenticate('jwt', {session: false}), houseController.commentHouse)
+
+
 module.exports = router

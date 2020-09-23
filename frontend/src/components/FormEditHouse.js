@@ -55,7 +55,7 @@ class FormEditHouse extends React.Component{
             }
         })
        
-        console.log(this.state)
+   
     } 
 
     getForm = async e =>{
@@ -67,7 +67,7 @@ class FormEditHouse extends React.Component{
                 [property]: value
             }
         })
-        console.log(this.state.house)
+       
        
     }
 
@@ -134,7 +134,7 @@ class FormEditHouse extends React.Component{
         if (this.state.errors.garden === "" && this.state.errors.address === "" && this.state.errors.photo2 === "" && this.state.errors.photo=== "" && this.state.errors.price=== "" && this.state.errors.squareMeters=== "" && this.state.errors.bathrooms=== "" && this.state.errors.neighborhood=== "" && this.state.errors.bedrooms=== ""  ){
            let id = this.props.id
         const res = await this.props.sendModifyHouse(this.state.house , id)
-        console.log(res)
+     
         
         if (res.data.success === true){
             await Swal.fire({  title: 'House modified successfuly!',  icon: 'success',  showConfirmButton: false, timer: 3000,allowOutsideClick: false})

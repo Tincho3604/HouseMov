@@ -6,7 +6,7 @@ import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { connect } from 'react-redux'
 const Header = (props) => {
 
-    console.log(props.userLogged)
+ 
     return (
         <header>
 
