@@ -1,4 +1,4 @@
-# MYTINERARY
+# HOUSE-MUV
 
 _Aplicación web desarrollada con stack mern. Es una aplicación de bienes raices cuyo objetivo es conectar a compradores con vendedores evitando así el tedioso y costoso proceso de que una inmobiliaria intervenga
 
