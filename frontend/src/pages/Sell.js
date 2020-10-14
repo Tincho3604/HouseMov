@@ -5,7 +5,7 @@ import FormSell from '../components/FormSell'
 import { connect } from 'react-redux'
 const Sell = (props) =>{
 
-  
+  //Pagina para cargar una casa
     return(
         <>
         <Header />

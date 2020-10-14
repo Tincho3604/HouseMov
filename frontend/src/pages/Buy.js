@@ -1,12 +1,15 @@
 import React from 'react'
 import Header from '../components/Header'
 import '../styles/buy.css'
-import { faBed, faCheck, faTimes, faDollarSign, faMapMarkedAlt, faMoneyBillAlt, faMoneyBillWave, faToilet, faTree } from '@fortawesome/free-solid-svg-icons'
+import { faBed, faCheck, faTimes,faMapMarkedAlt, faMoneyBillAlt, faToilet, faTree } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { connect } from 'react-redux'
 import houseActions from '../redux/actions/houseActions'
 import Footer from '../components/Footer'
 import { NavLink } from 'react-router-dom'
+
+
+//Pagina comprar donde se puede ver el listado de las casas disponibles y aplicar diferentes filtros
 
 class Buy extends React.Component {
 
@@ -20,7 +23,7 @@ class Buy extends React.Component {
     async componentDidMount() {
         window.scrollTo({top: 0, behavior: 'smooth'})
          await this.props.getHouses()
-
+        //Cuando el componente obtengo las casas mediante una action y las guardo en el state
          this.setState({
              ...this.state,
              houses: this.props.houses,
@@ -29,6 +32,7 @@ class Buy extends React.Component {
      }
 
     inputFilterHome = e => {
+        //Obtengo el valor del input, para ver de que manera se procederá a filtrar u ordenar las casas
         const property = e.target.name
         const value = e.target.value
         this.setState({
@@ -38,8 +42,12 @@ class Buy extends React.Component {
  
     }
     filterP = () =>{
+        //Esta funcion me permite filtrar las casas por su precio
+        //Filtra las casas guardadas en el state
         var filtered = this.state.houses
         if (this.state.price !== ""){
+            //En el valor price del state guardo el value de la option del input seleccionado
+            //Y de existir filtro las casas
             switch (this.state.price){
                 case "60000":
                     filtered = this.state.houses.filter(house=>(
@@ -57,13 +65,16 @@ class Buy extends React.Component {
                         house.price > 150000
                     ))
                     return(filtered)
+                    //Devuelvo las casas filtradas
             }
         }
     }
 
     orderF = (filtered) =>{
-        
+        //Esta funcion recibe como parametro las casas filtradas
+        //Las ordena por popularidad o fecha de publicación
         if(this.state.order !==""){
+            //Si el existe un valor guardado en el state para el orden, procedo a ordenarlas
             switch (this.state.order){
                 case "mostPop":
                     filtered.sort((a,b) => b.views - a.views)
@@ -87,7 +98,7 @@ class Buy extends React.Component {
                     return(filtered)
             }
         }else{
-            return filtered
+            return filtered//Devuelvo las casas filtradas y ordenadas
         }
     }
     
@@ -96,14 +107,19 @@ class Buy extends React.Component {
     render() {
        
         const searchFilterHome = async (e) => {
+
             const filtered =  await this.filterP()
+            //Ordeno y obtengo las casas filtradas
             if (filtered === undefined){
+                //Si no hay casas filtradas
                 const allfiltered = this.orderF(this.state.houses)
+                //Ordeno todas las casas y las guardo en el state
                 this.setState({
                     ...this.state,
                     filteredHouse: allfiltered
                 })
             }else{
+                //De lo contrario ordeno las casas filtradas
                 this.orderF(filtered)
                 this.setState({
                     ...this.state,
@@ -127,10 +143,7 @@ class Buy extends React.Component {
                 <div className="mainBackground" style={{backgroundImage: `url(${mainBackground})`}} >
                     <div className='divFilter'>
                         <h1 className="titleFilter">Find the house of your dreams</h1>
-                        {/* <div className='buttonFilter'>
-                            <Button >Buy a house</Button>
-                            <Button >Rent a house</Button>
-                        </div> */}
+                        
                         <div className='filterSelects'>
                             <select onChange={this.inputFilterHome} className="inputSelect" name="price" placeholder="Filter by Price" >
                                 <option className="titleOption" disabled selected>Filter by Price</option>
@@ -151,11 +164,6 @@ class Buy extends React.Component {
                         <button className="btnFilter" onClick={searchFilterHome} >Search</button>
                     </div>
                 </div>
-                <div className="conatinerBanners">
-                    {/* <div className="divBanner" style={{backgroundImage: `url(${divBanner1})`}}></div>
-                    <div className="divBanner" style={{backgroundImage: `url(${divBanner2})`}}></div>
-                    <div className="divBanner" style={{backgroundImage: `url(${divBanner3})`}}></div> */}
-                </div>
                 <h3 className="titleHouses">Houses</h3>
                     <div className="mainContainerHouses" style={{height: '20%'}}>
                         
@@ -170,9 +178,16 @@ class Buy extends React.Component {
                                             <div className="containerHouseDetails">
                                                     <p><FontAwesomeIcon icon={faMoneyBillAlt}/> {house.price} USD</p>
                                                     
-                                                        <p className="bath"><FontAwesomeIcon icon={faToilet} /> {house.bathrooms}</p>
-                                                        <p className="bath"><FontAwesomeIcon icon={faBed} /> {house.bedrooms}</p>
-                                                        <p><p>{house.garden ? <> <FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faCheck} /></>: <> <FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faTimes} /> </>}</p></p>
+                                                        <p className="bath">
+                                                            <FontAwesomeIcon icon={faToilet} /> {house.bathrooms}
+                                                        </p>
+                                                        <p className="bath">
+                                                            <FontAwesomeIcon icon={faBed} /> {house.bedrooms}
+                                                        </p>
+                                                        <p>{house.garden 
+                                                            ? <> <FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faCheck} /></>
+                                                            : <> <FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faTimes} /> </>}
+                                                        </p>
                                                     
                                             </div>
                                     </div>

@@ -33,6 +33,7 @@ class SignUp extends React.Component{
     }
     
     getForm = async e =>{
+        //Funcion para obtener los valores de los inputs y guardarlos en el state
         const property = e.target.name
         const value = e.target.value
         await this.setState({
@@ -44,9 +45,9 @@ class SignUp extends React.Component{
    
     }
     submit = async e =>{
-        
+        //Funcion para validar los datos y enviarlos
         const errors = this.state.errors
-        
+        //Expresiones regulares para validar email y contraseña
         const validEmailRegex = RegExp( 	
             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
         const validPassword = RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}/)
@@ -82,14 +83,18 @@ class SignUp extends React.Component{
         this.setState({
             errors
         })
-        if (this.state.errors.user === "" && this.state.errors.passwordValidation === "" && this.state.errors.password === "" && this.state.errors.name=== "" && this.state.errors.surname=== "" && this.state.errors.mail=== "" ){
-             const response = await this.props.createAccount(this.state.newUser)
+        if (this.state.errors.user === "" 
+        && this.state.errors.passwordValidation === "" 
+        && this.state.errors.password === "" 
+        && this.state.errors.name=== "" 
+        && this.state.errors.surname=== "" 
+        && this.state.errors.mail=== "" 
+        ){
+            //Si no tengo errores creo una cuenta
+            const response = await this.props.createAccount(this.state.newUser)
             
-             if (response.success === true){
-               
-                
-                
-            }else{
+            if (response.success === false){
+                //Si la respueste es falsa muestro los errores de que el email o el usuario ya estan utilizados
                 if (response.user !== ""){
                     this.setState({
                         errors:{
@@ -115,7 +120,7 @@ class SignUp extends React.Component{
     }
     
     responseGoogle = async (response) =>{
-
+        //Funcion para crear cuenta mediante google
         this.setState({
             ...this.state,
             newUser:{
@@ -129,16 +134,21 @@ class SignUp extends React.Component{
             }
         })
         const res = await this.props.createAccount(this.state.newUser)
-       
-        if (res.success === true){
-            
-            
-        }else{
+       //Creo la cuenta
+        if (res.success === false){
+            //Muestra al usuario una alerta en caso de ya haberse registrado con su cuenta
             if (res.user !== ""){
-                Swal.fire({  title: 'Please sign into your account!',  text: `You are already register with this Google account`,  icon: 'warning',  showConfirmButton: false, timer: 3000,allowOutsideClick: false})
+                Swal.fire({  
+                    title: 'Please sign into your account!',  
+                    text: `You are already register with this Google account`,  
+                    icon: 'warning',  
+                    showConfirmButton: false, 
+                    timer: 3000,
+                    allowOutsideClick: false
+                })
             }
-            
-        }
+        }  
+    
     }
 
     

@@ -3,6 +3,9 @@ import '../styles/sellHome.css'
 import {connect} from 'react-redux'
 import houseActions from '../redux/actions/houseActions'
 import Swal from 'sweetalert2'
+
+//Componente con un formulario para cargar una nueva casa
+
 class FormSell extends React.Component {
 
     state = {
@@ -31,6 +34,7 @@ class FormSell extends React.Component {
     }
 
     readInput = e => {
+        //Funcion para guardar en el state los datos ingresados en los inputs
         const dataInput = e.target.name
         const value = e.target.value
 
@@ -43,6 +47,7 @@ class FormSell extends React.Component {
     }
 
     sendData =async  e => {
+        //Funcion para validar y enviar los datos de la casa a cargar
         e.preventDefault()
  
 
@@ -102,43 +107,59 @@ class FormSell extends React.Component {
         this.setState({
             errors
         })
-        if (this.state.errors.garden === "" && this.state.errors.address === "" && this.state.errors.photo2 === "" && this.state.errors.photo=== "" && this.state.errors.price=== "" && this.state.errors.squareMeters=== "" && this.state.errors.bathrooms=== "" && this.state.errors.neighborhood=== "" && this.state.errors.bedrooms=== ""  ){
-            
-        const res = await this.props.sendHouse(this.state.houseSell , this.props.tokenUser)
-        if (res === true){
-            await Swal.fire({  title: 'House loaded successfuly!',  icon: 'success',  showConfirmButton: false, timer: 3000,allowOutsideClick: false})
-            this.setState({
-                ...this.state,
-                houseSell:{
-                address: '',
-                neighborhood: '',
-                bedrooms: '',
-                bathrooms: '',
-                squareMeters: '',
-                price: '',
-                garden: '',
-                photo: '',
-                photo2: ''
-                }
-            })
-        }else{
-            await Swal.fire({  title: 'House was not loaded successfuly!',  icon: 'warning',  showConfirmButton: false, timer: 3000,allowOutsideClick: false})
-            this.props.history.push('/')
-            this.setState({
-                ...this.state,
-                houseSell:{
-                address: '',
-                neighborhood: '',
-                bedrooms: '',
-                bathrooms: '',
-                squareMeters: '',
-                price: '',
-                garden: '',
-                photo: '',
-                photo2: ''
-                }
-            })
-        }
+        if (this.state.errors.garden === "" 
+        && this.state.errors.address === "" 
+        && this.state.errors.photo2 === "" 
+        && this.state.errors.photo=== "" 
+        && this.state.errors.price=== "" 
+        && this.state.errors.squareMeters=== "" 
+        && this.state.errors.bathrooms=== "" 
+        && this.state.errors.neighborhood=== "" 
+        && this.state.errors.bedrooms=== ""  
+        ){
+            //Si no tengo error en las validaciones envio los datos mediante una action
+            const res = await this.props.sendHouse(this.state.houseSell , this.props.tokenUser)
+            if (res === true){
+                await Swal.fire({  title: 'House loaded successfuly!',  icon: 'success',  showConfirmButton: false, timer: 3000,allowOutsideClick: false})
+                this.setState({
+                    ...this.state,
+                    houseSell:{
+                    address: '',
+                    neighborhood: '',
+                    bedrooms: '',
+                    bathrooms: '',
+                    squareMeters: '',
+                    price: '',
+                    garden: '',
+                    photo: '',
+                    photo2: ''
+                    }
+                })
+            }else{
+                await Swal.fire({  
+                    title: 'House was not loaded successfuly!', 
+                    icon: 'warning',  
+                    showConfirmButton: false, 
+                    timer: 3000,
+                    allowOutsideClick: false
+                })
+                this.props.history.push('/')
+                //Limpio el value de los inputs
+                this.setState({
+                    ...this.state,
+                    houseSell:{
+                    address: '',
+                    neighborhood: '',
+                    bedrooms: '',
+                    bathrooms: '',
+                    squareMeters: '',
+                    price: '',
+                    garden: '',
+                    photo: '',
+                    photo2: ''
+                    }
+                })
+            }
         }
     }
 

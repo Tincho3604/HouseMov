@@ -11,13 +11,15 @@ class Comments extends React.Component{
         comments:[]
     }
     
-    
+    //Componente donde se muestran los comentarios de cada caso
 
 componentDidMount(){
+    //Al montarse un componente obtengo los comentarios
     this.getComments()
 }
 
 getComments = async () =>{
+    //Funcion para obtener los comentarios y guardarlos en el state
     var comments = await this.props.getComments(this.state.house)
     this.setState({
         ...this.state,
@@ -25,12 +27,9 @@ getComments = async () =>{
     })
 }
 
-/* deleteComment = async (id) =>{
-    await this.props.deleteComment(id)
-    this.getComments()
-} */
 
 getNewComment = (e) =>{
+    //Funcion para obtener el texto del input
     e.preventDefault()
     const value = e.target.value
     const name = e.target.name
@@ -43,7 +42,7 @@ getNewComment = (e) =>{
 }
 
 sendComment = async () =>{
-    
+    //Funcion para guardar un comentario
     var response = await this.props.commentItinerary(this.props.token, this.state.house, this.state.newComment)
     this.getComments()
     this.setState({
@@ -63,7 +62,7 @@ sendComment = async () =>{
                                 
                                 <div className="nameDelete">
                                     <p className="userName">{comment.user} asked:</p>
-                                    {/* {this.props.user === comment.user ? <button className="deleteButton" onClick={() =>this.deleteComment(comment._id)}>X</button> : null } */}
+                                    
                                 </div>
 
                                 <p className="comment">{comment.comment}</p> 
@@ -73,7 +72,13 @@ sendComment = async () =>{
                     })}
                 </div>
                 <div className="inputContainer">
-                    <input className="input" onChange={this.getNewComment} value={this.state.newComment} type="text" name="newComment" placeholder="Insert a comment"></input>
+                    <input 
+                    className="input" 
+                        onChange={this.getNewComment} 
+                        value={this.state.newComment} 
+                        type="text" name="newComment" 
+                        placeholder="Insert a comment">
+                    </input>
                     <button className="submitBtn" onClick={this.sendComment}>Submit</button>
                 </div>
             </div>

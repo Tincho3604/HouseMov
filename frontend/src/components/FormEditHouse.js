@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Swal from 'sweetalert2'
 import houseActions from '../redux/actions/houseActions'
 
-
+//Componente para modificar una casa ya subida por el usuario
 
 class FormEditHouse extends React.Component{
     state = {
@@ -38,27 +38,16 @@ class FormEditHouse extends React.Component{
         const idSearch = this.props.id
         
         const search = await this.props.getHouseById(idSearch)
-        
+        //Cuando el componente se monta obtengo los datos de la casa y los cargo en el state
         this.setState({
-            
-            house:{
-                ...this.state.house,
-                address: search.house.address,
-                neighborhood: search.house.neighborhood,
-                bedrooms: search.house.bedrooms,
-                bathrooms: search.house.bathrooms,
-                squareMeters: search.house.squareMeters,
-                price: search.house.price,
-                garden: search.house.garden,
-                photo: search.house.photo,
-                photo2: search.house.photo2
-            }
+            house:search.house
         })
        
    
     } 
 
     getForm = async e =>{
+        //Funcion para almacenar el texto ingresado en los inputs
         const property = e.target.name
         const value = e.target.value
         await this.setState({
@@ -73,7 +62,7 @@ class FormEditHouse extends React.Component{
 
     sendData =async  e => {
         e.preventDefault()
- 
+        //Funcion para validar y enviar los nuevos datos
 
         const errors = this.state.errors 
 
@@ -131,18 +120,38 @@ class FormEditHouse extends React.Component{
         this.setState({
             errors
         })
-        if (this.state.errors.garden === "" && this.state.errors.address === "" && this.state.errors.photo2 === "" && this.state.errors.photo=== "" && this.state.errors.price=== "" && this.state.errors.squareMeters=== "" && this.state.errors.bathrooms=== "" && this.state.errors.neighborhood=== "" && this.state.errors.bedrooms=== ""  ){
+        if (this.state.errors.garden === "" 
+        && this.state.errors.address === "" 
+        && this.state.errors.photo2 === "" 
+        && this.state.errors.photo=== "" 
+        && this.state.errors.price=== "" 
+        && this.state.errors.squareMeters=== "" 
+        && this.state.errors.bathrooms=== "" 
+        && this.state.errors.neighborhood=== "" 
+        && this.state.errors.bedrooms=== ""  ){
            let id = this.props.id
-        const res = await this.props.sendModifyHouse(this.state.house , id)
+           //Si no tengo errores de validación envio los datos
+            const res = await this.props.sendModifyHouse(this.state.house , id)
      
         
-        if (res.data.success === true){
-            await Swal.fire({  title: 'House modified successfuly!',  icon: 'success',  showConfirmButton: false, timer: 3000,allowOutsideClick: false})
-            this.props.history.push('/')
+            if (res.data.success === true){
+                await Swal.fire({  
+                    title: 'House modified successfuly!',  
+                    icon: 'success',  
+                    showConfirmButton: false, 
+                    timer: 3000,
+                    allowOutsideClick: false})
+                this.props.history.push('/')
             
-        }else{
-            await Swal.fire({  title: 'House was not modified successfuly!',  icon: 'warning',  showConfirmButton: false, timer: 3000,allowOutsideClick: false})
-            this.props.history.push('/')
+            }else{
+                await Swal.fire({  
+                    title: 'House was not modified successfuly!',  
+                    icon: 'warning', 
+                    showConfirmButton: false, 
+                    timer: 3000,
+                    allowOutsideClick: false
+                })
+                this.props.history.push('/')
             
         }
         

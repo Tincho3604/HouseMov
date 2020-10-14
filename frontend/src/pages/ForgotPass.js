@@ -6,6 +6,8 @@ import userActions from '../redux/actions/userActions'
 import {connect} from 'react-redux'
 import houseActions from '../redux/actions/houseActions'
 import Swal from 'sweetalert2'
+
+//Page a la que accede el usuario para recuperar su contraseña
 class ForgotPass extends React.Component{
 
     state={
@@ -15,6 +17,7 @@ class ForgotPass extends React.Component{
     }
 
     getForm = e =>{
+        //Obtengo y guardo el valor ingresado en el input
         e.preventDefault()
         const value = e.target.value
         this.setState({
@@ -28,7 +31,7 @@ class ForgotPass extends React.Component{
 
 
     submit =  async e => {
- 
+        //funcion para validar y enviar la información
         e.preventDefault()
 
         this.setState({
@@ -47,7 +50,15 @@ class ForgotPass extends React.Component{
                     disabled: false
                 }) 
             } else{
-                Swal.fire({  title: 'A email has been sent!',  text: "Please check your mail box",  icon: 'success',  showConfirmButton: false, timer: 4000,allowOutsideClick: false})
+                Swal.fire({  
+                    title: 'A email has been sent!',  
+                    text: "Please check your mail box",  
+                    icon: 'success',  
+                    showConfirmButton: 
+                    false, 
+                    timer: 4000,
+                    allowOutsideClick: false
+                })
                 this.props.history.push('/')
                 this.setState({
                     ...this.state,

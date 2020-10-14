@@ -5,7 +5,7 @@ import FormEditHouse from '../components/FormEditHouse'
 import Header from '../components/Header'
 
 
-
+//Page para editar una casas
 class MyAccount extends React.Component{
     
     componentDidMount(){

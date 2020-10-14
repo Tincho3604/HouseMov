@@ -3,6 +3,7 @@ const User = require('../models/userModel')
 const Comment = require("../models/commentModel")
 
 const houseController={
+    //Obtener todas las casas
     getHouse: async (req, res) => {
         try{
             const data = await House.find()
@@ -14,8 +15,8 @@ const houseController={
                 success: false,
                 response:"Error loading Houses"})
         }
-    },
-        
+    },  
+    //Controlador para cargar una casa
     uploadHouse: async (req, res) => {
         
         var userId = req.user._id
@@ -46,7 +47,7 @@ const houseController={
         }
         
     },
-
+    //Controlador para borrar una casa
     deleteHouse: async (req, res) =>{
         var id = req.params.id
         try{
@@ -60,7 +61,7 @@ const houseController={
                 response:"Error deleting House"})
         }
     },
-
+    //Controlador para modificar una casa
     modifyHouse: async (req, res) => {
         var id= req.params.id
         var {address, neighborhood, squareMeters, bedrooms, bathrooms, price, garden} = req.body
@@ -81,6 +82,7 @@ const houseController={
                 response:"Error modifying House"})
         }
     },
+    //Controlador para obtener una casa mediante a su id
      getHouseById: async (req, res) =>{
         var id = req.params.id
         try{
@@ -108,6 +110,7 @@ const houseController={
             })
         }
     },
+    //Controlador para subir una vista de una determinada casa
     uploadViews: async (req, res) =>{
         var id = req.params.id
         try{
@@ -125,6 +128,7 @@ const houseController={
             })
         }
     },
+    //Controlador para obtener las casas asociadas a un usuario
     getHouseByUser: async (req, res) =>{
 
         try{
@@ -140,6 +144,7 @@ const houseController={
                 })
         }
     },
+    //Obtener los comentarios de una determinada casa
     getCommentsByHouseId: async (req, res) =>{
         var houseId = req.params.id
         try{
@@ -155,6 +160,7 @@ const houseController={
             })
         }
     },
+    //Comentar una casa
     commentHouse: async (req, res) =>{
       
         var user = req.user.user

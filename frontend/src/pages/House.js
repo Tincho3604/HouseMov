@@ -12,6 +12,7 @@ import Comments from '../components/Comments'
 import '../styles/comments.css'
 
 
+//Page para ver la información de una casa en particular
 class House extends React.Component {
 
     state = {
@@ -21,7 +22,9 @@ class House extends React.Component {
     async componentDidMount() {
         const idSearch = this.props.match.params.id
         this.props.uploadViews(idSearch)
+        //Subo la cantidad de vistas de la casa
         const response = await this.props.getHouseById(idSearch)
+        //Obtengo la casa y la guardo en el state
         this.setState({
             ...this.state,
             house: response.house,
@@ -35,37 +38,26 @@ class House extends React.Component {
 
         if (this.state.house === undefined || this.state.house ===null) {
             return null
-        } else if (this.state.house !== undefined) {
-            var address = this.state.house.address
-            var photo = this.state.house.photo
-            var photo2 = this.state.house.photo2
-            var bathrooms = this.state.house.bathrooms
-            var squareMeters = this.state.house.squareMeters
-            var bedrooms = this.state.house.bedrooms
-            var garden = this.state.house.garden
-            var neighborhood = this.state.house.neighborhood
-            var price = this.state.house.price
-
         }
-
+        
         return (
             <>
                 <Header />
                 <h3 className="titleHouses">House Details</h3>
                 <div className="details__house">
-                    <p><FontAwesomeIcon icon={faMapMarked} /> {address}</p>
-                    <p><FontAwesomeIcon icon={faMapMarkerAlt} /> {neighborhood}</p>
-                    <p>Square Meters: {squareMeters}m2</p>
-                    <p><FontAwesomeIcon icon={faToilet} /> {bathrooms}</p>
-                    <p><FontAwesomeIcon icon={faBed} /> {bedrooms}</p>
-                    <p>{garden ? <> <FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faCheck} /> </> : <><FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faTimes} /> </>}</p>
+                    <p><FontAwesomeIcon icon={faMapMarked} /> {this.state.house.address}</p>
+                    <p><FontAwesomeIcon icon={faMapMarkerAlt} /> {this.state.house.neighborhood}</p>
+                    <p>Square Meters: {this.state.house.squareMeters}m2</p>
+                    <p><FontAwesomeIcon icon={faToilet} /> {this.state.house.bathrooms}</p>
+                    <p><FontAwesomeIcon icon={faBed} /> {this.state.house.bedrooms}</p>
+                    <p>{this.state.house.garden ? <> <FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faCheck} /> </> : <><FontAwesomeIcon icon={faTree} /> <FontAwesomeIcon icon={faTimes} /> </>}</p>
                 </div>
                 <div className="price__house">
                     <span>${price} USD</span>
                 </div>
                 <AliceCarousel mouseTrackingDisabled touchTrackingEnabled={true} autoPlay autoPlayInterval={4000}>
-                    <img src={photo} className="photo__house" />
-                    <img src={photo2} className="photo__house" />
+                    <img src={this.state.house.photo} className="photo__house" />
+                    <img src={this.state.house.photo2} className="photo__house" />
                 </AliceCarousel>
                 
                 

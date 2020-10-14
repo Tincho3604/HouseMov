@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+// Conexion a la base de datos
 mongoose.connect(process.env.MONGODB_URI, {
     useCreateIndex: true,
     useFindAndModify: false,

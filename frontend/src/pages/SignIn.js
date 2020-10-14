@@ -20,6 +20,7 @@ class SignIn extends React.Component{
         error:""
     }
     getForm = e =>{
+        //Funcion para obtener los valores de los inputs y guardarlos en el state
         e.preventDefault()
         const property = e.target.name
         const value = e.target.value
@@ -36,7 +37,7 @@ class SignIn extends React.Component{
 
 
     submit =  async e => {
- 
+        //Funcion para validar los datos y enviarlos
         e.preventDefault()
         if (this.state.logUser.name ==="" || this.state.logUser.password === "" ){
             this.setState({
@@ -45,18 +46,17 @@ class SignIn extends React.Component{
         }else{
             const logUser= {user:this.state.logUser.user , password: this.state.logUser.password}
             const response =  await this.props.logUser(logUser)
-            
-            if (response.success === true){
-                
-            }else{
+            //Si los datos ingresados son erroneos se los muestro al usuario
+            if (response.success === false){
                 this.setState({
                     error: response
-                })    
+                })   
             }
         }
     }
 
     responseGoogle = async (response) =>{
+        //Funcion para loguearse con google
         this.setState({
             ...this.state,
             logUser:{
@@ -65,14 +65,20 @@ class SignIn extends React.Component{
             }
         })
         const res = await this.props.getUser(this.state.logUser)
-  
+        //Si el usuario existe, este inicia sesión
         if(res === true){
             const resp =  await this.props.logUser(this.state.logUser)
-
-            
-            }else{
-                Swal.fire({  title: 'You must sign up!',  text: `Please go to create an account, ${response.profileObj.givenName}.`,  icon: 'warning',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
-            }
+        }else{
+            //De no existir se le avisará que debe crear una cuenta
+            Swal.fire({  
+                title: 'You must sign up!',  
+                text: `Please go to create an account, ${response.profileObj.givenName}.`,  
+                icon: 'warning',  
+                showConfirmButton: false, 
+                timer: 2000,
+                allowOutsideClick: false
+            })
+        }
     }
 
     

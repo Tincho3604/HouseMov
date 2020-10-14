@@ -2,6 +2,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 
 const userActions = {
+    //Crear una nueva cuenta
     createAccount : newUser =>{
         return async (dispatch, getState) => {       
             const res = await axios.post('http://localhost:4000/api/users', newUser)
@@ -21,7 +22,14 @@ const userActions = {
                
             }else{
               
-                await Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you here, ${res.data.response.name}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+                await Swal.fire({  
+                    title: 'Welcome!',  
+                    text: `It´s nice to have you here, ${res.data.response.name}.`,  
+                    icon: 'success',  
+                    showConfirmButton: false,
+                     timer: 2000,
+                     allowOutsideClick: false
+                })
                 dispatch({
                     type: "LOG_USER_INTO_APP",
                     payload:res.data.response
@@ -35,6 +43,7 @@ const userActions = {
         }
 
     },
+    //Obtener si el usuario ya esta registrado 
     getUser: user =>{
         return async (dispatch, getState) =>{
             
@@ -46,6 +55,7 @@ const userActions = {
             return res.data.success
         }
     },
+    //Logear un usuario
     logUser : user =>{
         return async ( dispatch, getState) => {
             const res = await axios.post("http://localhost:4000/api/login", user)
@@ -54,7 +64,14 @@ const userActions = {
                 return (res.data.response)
                 
             }else{
-                await Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you again, ${res.data.response.name}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+                await Swal.fire({  
+                    title: 'Welcome!',  
+                    text: `It´s nice to have you again, ${res.data.response.name}.`,  
+                    icon: 'success',  
+                    showConfirmButton: false, 
+                    timer: 2000,
+                    allowOutsideClick: false
+                })
                 dispatch({
                     type: "LOG_USER_INTO_APP",
                     payload:res.data.response
@@ -66,6 +83,7 @@ const userActions = {
             }
         }
     },
+    //Desloguear un usuario
     unlogUser : () => {
         return (dispatch, getState) =>{
             dispatch({
@@ -73,6 +91,7 @@ const userActions = {
             })
         }
     },
+    //Perdurar la sesion de un usuario gracias a local storage
     forcedLogin: token =>{
         return async(dispatch, getState) =>{
             const res = await axios.get("http://localhost:4000/api/validateToken", {
@@ -94,6 +113,7 @@ const userActions = {
             })}
         }
     },
+    //Obtener datos del usuario 
     getFullUser: token =>{
     
         return async(dispatch, getState) =>{
@@ -109,6 +129,7 @@ const userActions = {
             return res.data.response.userToSend
         }
     },
+    //Modificar cuenta subiendo un archivo
     modAccount: (token, fd) =>{
       
         return async(dispatch, getState) =>{
@@ -121,7 +142,14 @@ const userActions = {
          
         
                 if (res.data.success){
-                    await Swal.fire({  title: 'User Modified!',  text: `Please wait, we are uploading your data`,  icon: 'success',  showConfirmButton: false, timer: 6000, allowOutsideClick: false})
+                    await Swal.fire({  
+                        title: 'User Modified!',  
+                        text: `Please wait, we are uploading your data`,  
+                        icon: 'success',  
+                        showConfirmButton: false, 
+                        timer: 6000, 
+                        allowOutsideClick: false
+                    })
                     dispatch({
                         type: "LOG_USER_INTO_APP",
                         payload:{
@@ -136,12 +164,20 @@ const userActions = {
                         user: res.data.success
                     }
                 }else{
-                    await Swal.fire({  title: 'User not Modified!',  text: `Please try again`,  icon: 'warning',  showConfirmButton: false, timer: 6000, allowOutsideClick: false})
+                    await Swal.fire({  
+                        title: 'User not Modified!',  
+                        text: `Please try again`,  
+                        icon: 'warning',  
+                        showConfirmButton: false, 
+                        timer: 6000, 
+                        allowOutsideClick: false
+                    })
                 }
+
             
         }
     },
-
+    //Modificar cuenta sin subir un archivo
     modAccount1: (token, userMod) =>{
      
 
@@ -154,7 +190,14 @@ const userActions = {
          
         
             if (res.data.success){
-                await Swal.fire({  title: 'User Modified!',  text: `enjoy`,  icon: 'success',  showConfirmButton: false, timer: 6000, allowOutsideClick: false})
+                await Swal.fire({  
+                    title: 'User Modified!',  
+                    text: `enjoy`,  
+                    icon: 'success',  
+                    showConfirmButton: false, 
+                    timer: 6000, 
+                    allowOutsideClick: false
+                })
                 dispatch({
                     type: "LOG_USER_INTO_APP",
                     payload:{
@@ -169,10 +212,18 @@ const userActions = {
                     user: res.data.success
                 }
             }else{
-                await Swal.fire({  title: 'User not Modified!',  text: `Please try again`,  icon: 'warning',  showConfirmButton: false, timer:6000, allowOutsideClick: false})
+                await Swal.fire({  
+                    title: 'User not Modified!',  
+                    text: `Please try again`,  
+                    icon: 'warning',  
+                    showConfirmButton: false, 
+                    timer:6000, 
+                    allowOutsideClick: false
+                })
             }
             
         }
+        //Obtener comentarios
     },getComments: (idHouse) =>{
         return async (dispatch, getState) =>{
             const res = await axios.get("http://localhost:4000/api/houseComment/"+idHouse)
@@ -182,15 +233,7 @@ const userActions = {
             return (res.data.response)
         }
     } ,
-    /* deleteComment: (idComment) =>{
-        return async (dispatch, getState) =>{
-            const res = await axios.delete("https:/localhost:4000/api/houseComment+idComment)
-            dispatch({
-                type: "DELETE_COMMENTS"
-            })
-        }
-        
-    }, */
+    //Comentar una casa
     commentItinerary: (token, idHouse, comment) => {
         
             var id = idHouse

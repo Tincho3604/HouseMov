@@ -6,7 +6,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt
 const User = require('../models/userModel')
 
 
-//strategy
+//Se declara la estrategia de passport para obtener el token de un usuario
 
 module.exports = passport.use(new jwtStrategy({
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

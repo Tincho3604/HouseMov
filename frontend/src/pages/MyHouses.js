@@ -12,13 +12,16 @@ import { NavLink } from 'react-router-dom'
 import '../styles/myHouses.css'
 import Footer from '../components/Footer'
 
+//Pagina donde el usuario ve las casas que cargó
 class MyHouses extends React.Component {
     state = {
         data:[]
     }
     
         async componentDidMount(){
+            //Cuando el componente se monta verifico que el usuario exista
         await this.props.getUser()
+        //Obtengo los datos de las casas asociadas al usuario
         const housesUser = await this.props.getHouseByUser(this.props.token)
         this.setState({
         data:housesUser
@@ -77,20 +80,20 @@ class MyHouses extends React.Component {
                 <Header />    
                 <h3 className="titleHouses">My houses published</h3>
                 <div className="houseContainer1">
-                {datos.response.map(info => {
+                {datos.response.map(house => {
                     return (
                         
                         <div className="house1">
                             <div className="divHouse1">
-                                <img src={info.photo}/>
+                                <img src={house.photo}/>
                                 <div className="details1" >
-                                    <p>{info.address}</p>
-                                    <p>{info.neighborhood}</p>
-                                    <p><FontAwesomeIcon icon={faDollarSign} />{info.price} USD</p>
-                                    <p><FontAwesomeIcon icon={faEye} /> {info.views}</p>
+                                    <p>{house.address}</p>
+                                    <p>{house.neighborhood}</p>
+                                    <p><FontAwesomeIcon icon={faDollarSign} />{house.price} USD</p>
+                                    <p><FontAwesomeIcon icon={faEye} /> {house.views}</p>
                                 </div>
                             </div>
-                            <NavLink to={`/modifyHouse/${info._id}`}><button className="send1">Edit Info</button></NavLink>
+                            <NavLink to={`/modifyHouse/${house._id}`}><button className="send1">Edit Info</button></NavLink>
                         </div>
                         
                         

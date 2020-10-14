@@ -2,6 +2,9 @@ import React from 'react'
 import '../styles/popularHouses.css'
 import { faBed, faCheck, faTimes, faDollarSign, faToilet, faTree, faMoneyBillAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+//componente que muestra los detalles de una casa en la home
+
 const PopularHouse = (props) =>{
 
     return (

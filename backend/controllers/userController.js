@@ -4,7 +4,7 @@ const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const nodeMailer = require('nodemailer')
 
-
+//Crear transport para enviar mail para recuperar contraseña
 var transport = nodeMailer.createTransport({
     port:465, 
     host:"smtp.gmail.com",
@@ -16,6 +16,7 @@ var transport = nodeMailer.createTransport({
 })
 
 const userController={
+    //Obtener todos los usuarios
     getUser: async (req, res) => {
         try{
             const data = await User.find()
@@ -28,7 +29,7 @@ const userController={
                 response:"Error loading users"})
         }
     },
-        
+    //Crear un usuario
     uploadUser: async (req, res) => {
 
         let {user, password,name, surname,mail,role} = req.body//destructuring
@@ -73,6 +74,7 @@ const userController={
         }
         
     },
+    //Validación de los datos del usuario antes de cargarlo
     validateUser: (req, res, next) =>{
         const schema = Joi.object({
             user: Joi.string().min(2).max(40).trim().required(),
@@ -97,7 +99,7 @@ const userController={
         }
         
     },
-
+    //Controlador para borrar un usuario
     deleteUser: async (req, res) =>{
         var id = req.params.id
         try{
@@ -111,38 +113,8 @@ const userController={
                 response:"Error deleting user"})
         }
     },
-
-    /* modifyUser: async (req, res) => {
-        var id= req.user._id
-        var {name, photo, surname, role, country} = req.body
-
-        try{
-            
-            await User.updateOne(
-                {_id:id},{name: name.trim().charAt(0).toUpperCase() + name.slice(1),
-                    surname: surname.trim().charAt(0).toUpperCase() + surname.slice(1),
-                    role,
-                    country: country.trim().charAt(0).toUpperCase() + country.slice(1),
-                    photo: photo.trim()}
-                
-            )
- 
-            res.json({
-                success: true,
-                response: {
-                    name,
-                    photo,
-                    role
-                }
-            })
-            
-        }catch{
-            res.json({
-                success: false,
-                response:"Error modifying user"
-            })
-        }
-    } */modifyUser: async (req, res) => {
+    //Controlador para modificar un usuario si carga una foto nueva de perfil
+    modifyUser: async (req, res) => {
         
         var id= req.user._id
         var {name, surname, role, country} = req.body
@@ -196,7 +168,7 @@ const userController={
             })
         }
     },
-
+//Controlador para modificar usuario si este no sube una foto de perfil nueva
     modifyUser1: async (req, res) => {
         
         var id= req.user._id
@@ -229,7 +201,7 @@ const userController={
             })
         }
     },
-
+//Controlador para loguear un usuario
     logUser: async (req, res) => {
         var {user, password } = req.body
         
@@ -258,6 +230,7 @@ const userController={
             } 
         }
     },
+    //Controlador  para validar el token del usuario al proteger rutas
     validateToken: (req,res) =>{
         const name = req.user.name
         const photo = req.user.photo
@@ -267,6 +240,7 @@ const userController={
             response: {name, photo, role}
         })
     }, 
+    //Controlador para ver si el usuario ya esta registrado con google
     getUsersExist: async (req,res) =>{
         
         const user = req.body.user
@@ -281,6 +255,7 @@ const userController={
             })
         }
     },
+    //Controlador para obtener todos los datos del usuario cuando este quiera modificarlos
     getFullUser: async (req, res) =>{
         const id = req.user._id
         try{
@@ -307,6 +282,7 @@ const userController={
                 response:"Error geting user"})
         }
     },
+    //Controlador para generar una contraseña aleatoria y mandarla por mail al usuario
     getNewPass: async (req, res) =>{
         mailSent = req.body.mail
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import {connect} from 'react-redux'
 import userActions from '../redux/actions/userActions'
-
+//Componente para deslogueuar al usuario
 const LogOut = (props) =>{
     useEffect(()=> {
      
