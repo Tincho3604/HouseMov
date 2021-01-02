@@ -1,6 +1,6 @@
 # HOUSE-MUV
 
-_Web application developed with stack mern. It is a real estate application whose objective is to connect buyers with sellers thus avoiding the tedious and expensive process of a real estate agency intervening.
+_Web application developed with stack mern. It is a real estate application whose objective is to connect buyers with sellers thus avoiding the tedious and expensive process of a real estate agency intervening._
 _This project was an evaluative instance in the bootcamp carried out in mindhub._
 
 ## Demo 📦
@@ -70,11 +70,11 @@ _Mention the tools you used to create your project_
 
 _Project carried out in a group way_
 
-* ** Emiliano Ruffini  -  Leader of the group, versioning and documentation * [emiruffini] (https://github.com/emiruffini)
-* ** Tahyana Villareal  -  member of the group 
-* ** Martin Cumpe  -  member of the group 
-* ** Rusbent Matta  - group member 
-* ** Ivan Camperchiolli  -  member of the group 
+*  Emiliano Ruffini  -  Leader of the group, versioning and documentation * [emiruffini] (https://github.com/emiruffini)
+*  Tahyana Villareal  -  member of the group 
+*  Martin Cumpe  -  member of the group 
+*  Rusbent Matta  - group member 
+*  Ivan Camperchiolli  -  member of the group 
 
 ## License 📄
 
