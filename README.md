@@ -1,47 +1,48 @@
 # HOUSE-MUV
 
-_Aplicación web desarrollada con stack mern. Es una aplicación de bienes raices cuyo objetivo es conectar a compradores con vendedores evitando así el tedioso y costoso proceso de que una inmobiliaria intervenga._
-_Este proyecto fue una instancia evaluativa en el bootcamp realizado en mindhub_
+_Web application developed with stack mern. It is a real estate application whose objective is to connect buyers with sellers thus avoiding the tedious and expensive process of a real estate agency intervening.
+_This project was an evaluative instance in the bootcamp carried out in mindhub._
 
 ## Demo 📦
 
-_Para ver una demo del proyecto desplegado, puedes ir a [Demo del proyecto](https://housemuv-white.herokuapp.com/)_
+_To see a demo of the deployed project, you can go to [Project Demo] (https://housemuv-white.herokuapp.com/)._
 
-## Comenzando 🚀
+## Starting 🚀
 
-```# Instalar dependencias para el servidor
-npm install
-
-# Instalar dependencias para el cliente
-npm install
-
-# Correr solo el servidor
-npm start en backend
-
-# Correr solo el cliente
-npm start en frontend
-
-# El servidor corre en http://localhost:4000 y el cliente en http://localhost:3000
 ```
+# Install dependencies for the server
+npm install
 
-### Pre-requisitos 📋
+# Install dependencies for the client
+npm install
 
-Incluye un archivo `.env`en el directorio del servidor con las siguientes variables de entorno: MONGODB_URI, SECRETORKEY.
+# Run only the server
+npm start in backend
+
+# Run only the client
+npm start on frontend
+
+# The server runs at http: // localhost: 4000 and the client at http: // localhost: 3000
+``` 
+
+### Pre-requisites 📋
+
+Include a `.env` file in the server directory with the following environment variables: MONGODB_URI, SECRETORKEY.
 
 
-### Instalación 🔧
+### Installation 🔧
 
-_Ingresar a la carpeta del repositorio_ 
+_Enter the repository folder_
 
-_Ingresar a frontend_
+_Enter frontend_
 
 ```
 cd frontend
 npm install
 npm start
-```
+``` 
 
-_Ingresar a backend_
+_Enter backend_
 
 ```
 cd backend
@@ -49,39 +50,39 @@ npm install
 npm start
 ```
 
-_Tras realizar estos pasos ya podrás visualizar el proyecto_
+_After completing these steps you will be able to view the project_
 
 
-## Construido con 🛠️
+## Built with 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
-* [Node.js](https://nodejs.org) - Entorno de ejecución para JavaScript
-* [Express](https://expressjs.com) - Infraestructura de la aplicacion web
-* [MongoDB](https://www.mongodb.com) - Base de datos utilizada
-* [Mongoose](https://mongoosejs.com/) - Modelado de objetos (Object Document Mapper (ODM))
-* [Bcrypt](https://www.npmjs.com/package/bcrypt) - Librería para hashear contraseñas
-* [Jsonwebtoken](https://jwt.io/)
-* [React](https://es.reactjs.org/) - Framework utilizado
-* [Redux](https://es.redux.js.org/) - Utilizado para trabajar con un estado global
+_Mention the tools you used to create your project_
+* [Node.js] (https://nodejs.org) - Runtime environment for JavaScript.
+* [Express] (https://expressjs.com) - Infrastructure of the web application.
+* [MongoDB] (https://www.mongodb.com) - Database used.
+* [Mongoose] (https://mongoosejs.com/) - Object Modeling (Object Document Mapper (ODM)).
+* [Bcrypt] (https://www.npmjs.com/package/bcrypt) - Library for hashing passwords.
+* [Jsonwebtoken] (https://jwt.io/)
+* [React] (https://es.reactjs.org/) - Framework used.
+* [Redux] (https://es.redux.js.org/) - Used to work with a global state.
 
 
-## Autores ✒️
+## Authors ✒️
 
-_Proyecto realizado de manera grupal_
+_Project carried out in a group way_
 
-* **Emiliano Ruffini** - *Lider del grupo, versionado y documentación* [emiruffini](https://github.com/emiruffini)
-* **Tahyana Villareal** - *integrante del grupo*
-* **Martin Cumpe** - *integrante del grupo*
-* **Rusbent Matta** - *integrante del grupo*
-* **Ivan Camperchiolli** - *integrante del grupo*
+* ** Emiliano Ruffini  -  Leader of the group, versioning and documentation * [emiruffini] (https://github.com/emiruffini)
+* ** Tahyana Villareal  -  member of the group 
+* ** Martin Cumpe  -  member of the group 
+* ** Rusbent Matta  - group member 
+* ** Ivan Camperchiolli  -  member of the group 
 
-## Licencia 📄
+## License 📄
 
-Todos los derechos reservados. 
+All rights reserved.
 
-## Expresiones de Gratitud 🎁
+## Expressions of Gratitude 🎁
 
-* Agradezco a Fer B por la mentoría y la paciencia 🍺
-* También a Mindhub por la oportunidad de crecer como developer 🤓
+* I thank Fer B for the mentoring and patience 🍺
+* Also to Mindhub for the opportunity to grow as a developer 🤓
 
 
